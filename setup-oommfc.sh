@@ -39,7 +39,7 @@ popd
 
 
 # clean
-# pip uninstall --yes micromagneticmodel discretisedfield oommfc
+# pip uninstall --yes micromagneticmodel discretisedfield oommfc micromagneticmodel joommfutil
 
 
 
