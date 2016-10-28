@@ -1,4 +1,4 @@
 # oommfc
-conda install numpy matplotlib ipywidgets pytest pytest-cov
+conda install numpy matplotlib ipywidgets pytest pytest-cov scipy
 
 
