@@ -13,6 +13,8 @@ git clone git@github.com:joommf/discretisedfield.git
 git clone git@github.com:joommf/micromagneticmodel.git
 git clone git@github.com:joommf/oommfodt.git
 
+git clone git@github.com:joommf/oommfdata.git
+
 # then install
 
 pushd joommfutil
@@ -36,13 +38,10 @@ pushd oommfc
 pip install --editable .
 popd
 
+pushd oommfdata
+pip install --editable .
+popd
 
 
 # clean
 # pip uninstall --yes micromagneticmodel discretisedfield oommfc micromagneticmodel joommfutil
-
-
-
-
-
-
