@@ -13,7 +13,7 @@ git clone git@github.com:joommf/discretisedfield.git
 git clone git@github.com:joommf/micromagneticmodel.git
 git clone git@github.com:joommf/oommfodt.git
 
-git clone git@github.com:joommf/oommfdata.git
+git clone git@github.com:joommf/micromagneticdata.git
 
 git clone git@github.com:joommf/joommf.git
 
@@ -40,7 +40,7 @@ pushd oommfc
 pip install --editable .
 popd
 
-pushd oommfdata
+pushd micromagneticdata
 pip install --editable .
 popd
 
