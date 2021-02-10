@@ -1,0 +1,10 @@
+Order of release of Ubermag packages:
+
+1. ubermagutil
+2. disretisedfield (ubermagutil)
+3. ubermagtable (ubermagutil)
+4. micromagneticmodel (disretisedfield)
+5. micromagneticdata (disretisedfield, ubermagtable)
+6. miromagetictests (micromagneticmodel)
+7. oommfc (ubermagtable, micromagneyictests)
+8. ubermag (oommfc)
