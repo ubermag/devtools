@@ -1,0 +1,21 @@
+* To render the webpages locally
+
+(based on http://kbroman.org/simple_site/pages/local_test.html)
+
+** Install github-pages on local machine
+
+~gem install github-pages~
+
+and later
+
+~get update github-pages~
+
+** Build pages
+
+~jekyll build~
+
+** Serve generated html
+
+~jekyll serve~
+
+and open http://localhost:4000

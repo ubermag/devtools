@@ -1,9 +1,6 @@
-for dir in micromagneticmodel joommfutil discretisedfield oommfodt oommfc; do
+for dir in ubermagutil discretisedfield ubermagtable micromagneticmodel micromagneticdata micromagnetictests oommfc ubermag; do
     echo $dir
-    pushd $dir
+    pushd repos/$dir
     git pull -v
     popd
 done
-
-
-
