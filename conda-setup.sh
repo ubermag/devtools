@@ -7,7 +7,7 @@ cat ~/.condarc
 echo "Press return to proceed or CTRL+C to interrupt"
 read
 # oommfc
-conda install numpy matplotlib pytest pytest-cov sarge oommf
+conda install numpy matplotlib pytest pytest-cov sarge oommf scipy
 # conda install numpy matplotlib ipywidgets pytest pytest-cov
 # pip install sarge
 
