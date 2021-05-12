@@ -7,28 +7,29 @@
 
 
 # install dependencies first
-git clone git@github.com:joommf/oommfc.git
-git clone git@github.com:joommf/joommfutil.git
-git clone git@github.com:joommf/discretisedfield.git
-git clone git@github.com:joommf/micromagneticmodel.git
-git clone git@github.com:joommf/oommfodt.git
 
-git clone git@github.com:joommf/micromagneticdata.git
 
-git clone git@github.com:joommf/joommf.git
+git clone git@github.com:ubermag/ubermagutil.git
+git clone git@github.com:ubermag/discretisedfield.git
+git clone git@github.com:ubermag/ubermagtable.git
+git clone git@github.com:ubermag/micromagneticmodel.git 
+git clone git@github.com:ubermag/micromagneticdata.git 
+git clone git@github.com:ubermag/miromagnetictests.git
+git clone git@github.com:ubermag/oommfc.git
+git clone git@github.com:ubermag/ubermag.git 
 
 # then install
 
-pushd joommfutil
+pushd ubermagutil
 pip install --editable .
 popd
-
-pushd oommfodt
-pip install --editable .
-popd
-
 
 pushd discretisedfield
+pip install --editable .
+popd
+
+
+pushd ubermagtable
 pip install --editable .
 popd
 
@@ -36,18 +37,22 @@ pushd micromagneticmodel
 pip install --editable .
 popd
 
-pushd oommfc
-pip install --editable .
-popd
-
 pushd micromagneticdata
 pip install --editable .
 popd
 
-pushd joommf
+pushd micromagnetictests
+pip install --editable .
+popd
+
+pushd oommfc
+pip install --editable .
+popd
+
+pushd ubermag
 pip install --editable .
 popd
 
 
 # clean
-# pip uninstall --yes micromagneticmodel discretisedfield oommfc micromagneticmodel joommfutil
+pip uninstall ubermagutil discretisedfield ubermagtable micromagneticmodel micromagneticdata miromagnetictests oommfc ubermag.git 
