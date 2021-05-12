@@ -54,4 +54,4 @@ popd
 
 
 # clean (if desired)
-# pip uninstall ubermagutil discretisedfield ubermagtable micromagneticmodel micromagneticdata micromagnetictests oommfc ubermag.git 
+# pip uninstall ubermagutil discretisedfield ubermagtable micromagneticmodel micromagneticdata micromagnetictests oommfc ubermag
