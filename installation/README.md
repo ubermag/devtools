@@ -10,7 +10,7 @@ OR
 
 Create a new environment with all dependencies:
 ```bash
-conda env create -n ENVINORMENT_NAME -f environment.yml
+conda env create -n ENVIRONMENT_NAME -f environment.yml
 conda activate ENVIRONMENT_NAME
 ```
    
