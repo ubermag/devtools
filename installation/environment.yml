@@ -1,0 +1,15 @@
+name: ubermag-dev
+
+channels:
+  - conda-forge
+
+dependencies:
+  - ipython
+  - matplotlib
+  - notebook
+  - numpy
+  - oommf
+  - pytest
+  - pytest-cov
+  - sarge
+  - scipy
