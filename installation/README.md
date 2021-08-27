@@ -8,7 +8,7 @@ conda env update --file environment.yml
 
 OR
 
-create a new environment called `ubermag-dev` with all dependencies:
+Create a new environment called `ubermag-dev` with all dependencies:
 ```bash
 conda create -f environment.yml
 ```
@@ -28,5 +28,5 @@ Results should be visible in `~/.condarc` (Mac, Linux) or `WHERE` (Windows).
 
 ## Uninstalling packages
 ```bash
-$ pip uninstall ubermagutil discretisedfield ubermagtable micromagneticmodel micromagneticdata micromagnetictests oommfc ubermag
+$ pip uninstall ubermagutil discretisedfield ubermagtable micromagneticmodel micromagneticdata micromagnetictests oommfc mag2exp ubermag
 ```
