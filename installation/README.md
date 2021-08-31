@@ -13,7 +13,7 @@ Create a new environment with all dependencies:
 conda env create -n ENVIRONMENT_NAME -f environment.yml
 conda activate ENVIRONMENT_NAME
 ```
-   
+
 ## 2. Install ubermag packages using `clone-and-install-repos.bat`
 
 - Mac/Linux: `$ sh clone-and-install-repos.bat`
@@ -25,7 +25,7 @@ All dependencies are installed from `conda-forge` channel. To globally activate 
 ```bash
 conda config --add channels conda-forge
 ```
-Results should be visible in `~/.condarc` (Mac, Linux) or `WHERE` (Windows).
+Results should be visible in `~/.condarc` (Mac, Linux) or `C:\Users\Username\.condarc` (Windows).
 
 ## Uninstalling packages
 ```bash
