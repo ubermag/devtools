@@ -14,10 +14,12 @@ conda env create -n ENVIRONMENT_NAME -f environment.yml
 conda activate ENVIRONMENT_NAME
 ```
    
-## 2. Install ubermag packages using `clone-and-install-repos.bat`
+## 2. Install ubermag packages
 
-- Mac/Linux: `$ sh clone-and-install-repos.bat`
-- Windows: `$ call clone-and-install-repos.bat`
+- Mac/Linux: `$ sh clone-and-install-METHOD.bat`
+- Windows: `$ call clone-and-install-METHOD.bat`
+
+Choose either `METHOD=https` or `METHOD=ssh`.
    
 ## Optional: globally activate `conda-forge` channel
 
