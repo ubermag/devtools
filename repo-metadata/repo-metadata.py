@@ -1,5 +1,11 @@
+"""Template-based generation of common files in all Ubermag repositories."""
+# TODO
+# - Makefile
+# - setup.cfg
+# - partial substitution (probably required for Makefile)
 import argparse
 import datetime
+import os
 import re
 import string
 
@@ -7,10 +13,15 @@ import requests
 import tomli
 
 all_repos = ['discretisedfield']
-all_files = ['LICENSE', 'README.md']
+all_files = [
+    '.gitignore', '.github/workflows/conda.yml',
+    '.github/workflows/workflow.yml', 'LICENSE', 'Makefile', 'README.md',
+    'setup.cfg', 'setup.py'
+]
 
 
 def authors_readme(authors):
+    """Extract authors and affiliations for README."""
     with open('./authors.toml', 'rb') as fin:
         data = tomli.load(fin)
 
@@ -42,6 +53,7 @@ def authors_readme(authors):
 
 
 def contributors_readme(contributors):
+    """Extract contributors for README."""
     with open('./authors.toml', 'rb') as fin:
         data = tomli.load(fin)
 
@@ -65,14 +77,30 @@ def generate_files(*, repository, files):
         'about': pyproject['tool']['ubermag']['about'],
         'authors': ', '.join(authors),
         'authors_readme': authors_readme(authors),
+        'classifiers': '\n'.join(f'  {cl}' for cl in
+                                 pyproject['project']['classifiers']),
         'contributors_readme': contributors_readme(
             pyproject['tool']['ubermag']['contributors']),
         'copyright_holder': pyproject['tool']['ubermag']['copyright_holder'],
+        'dependencies': '\n'.join(f'  {dep}' for dep in
+                                  pyproject['project']['dependencies']),
         'description': pyproject['project']['description'],
         'doi': pyproject['tool']['ubermag']['doi'],
         'package': repository,
+        'url': pyproject['project']['urls']['homepage'],
+        'version': pyproject['project']['version'],
         'year': datetime.datetime.now().year,
     }
+
+    if 'scripts' in pyproject['project']:
+        data['console_scripts'] = 'console_scripts =\n'
+        data['console_scripts'] += '\n'.join(
+            f'  {s} = {n}' for s, n in pyproject['project']['scripts'].items())
+    else:
+        data['console_scripts'] = ''
+
+    # Might be obsolet if we clone the repos first.
+    os.makedirs(f'./{repository}/.github/workflows', exist_ok=True)
 
     for file in files:
         # Read template file.
@@ -80,12 +108,12 @@ def generate_files(*, repository, files):
             template = string.Template(fin.read())
 
         # Create content.
-        content = template.substitute(
+        content = template.safe_substitute(
             {key: data[key]
              for key in placeholders(template.template)})
 
         # Write file.
-        with open(f'./{file}', 'wt') as fout:
+        with open(f'./{repository}/{file}', 'wt') as fout:
             print(content, file=fout)
 
 
