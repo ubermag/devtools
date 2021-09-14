@@ -9,6 +9,10 @@
 "Natalie Downing" = {github = "@gamdow", affiliations = ["southampton"]}
 "Min RK" = {github = "@minrk", affiliations = ["simula"]}
 "Rebecca Carey" = {github = "@rlc2v07", affiliations = ["southampton"]}
+"Mark Vousden" = {github = "@mvousden", affiliations = ["southampton"]}
+"Marc-Antonio Bisotti" = {github = "@logicabrity", affiliations = ["southampton"]}
+"Vanessa Nehruji" = {github = "@vanessanehruji", affiliations = ["southampton"]}
+"Stefan Tibus" = {github = "@stibus", affiliations = []}
 
 [affiliations]
 imperial = "Department of Earth Science and Engineering, Imperial College London, London SW7 2AZ, UK"
