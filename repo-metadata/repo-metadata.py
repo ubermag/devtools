@@ -12,7 +12,10 @@ import string
 import requests
 import tomli
 
-all_repos = ['discretisedfield']
+all_repos = [
+    'discretisedfield', 'mag2exp', 'micromagneticdata', 'micromagneticmodel',
+    'micromagnetictests', 'oommfc', 'ubermag', 'ubermagtable', 'ubermagutil'
+]
 all_files = [
     '.gitignore', '.github/workflows/conda.yml',
     '.github/workflows/workflow.yml', 'LICENSE', 'Makefile', 'README.md',
