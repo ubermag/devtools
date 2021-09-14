@@ -55,3 +55,7 @@ $tomlcontributors
 about = """
 $about
 """
+
+#requires pip install coverage[toml]
+[tool.coverage.run]
+omit = oommfc/tests/*
