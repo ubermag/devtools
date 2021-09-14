@@ -18,8 +18,8 @@ all_repos = [
 ]
 all_files = [
     '.gitignore', '.github/workflows/conda.yml',
-    '.github/workflows/workflow.yml', 'LICENSE', 'Makefile', 'README.md',
-    'setup.cfg', 'setup.py'
+    '.github/workflows/workflow.yml', 'LICENSE', 'Makefile', 'pyproject.toml',
+    'README.md', 'setup.cfg', 'setup.py'
 ]
 
 
@@ -65,6 +65,11 @@ def contributors_readme(contributors):
                       for contributor in contributors])
 
 
+def list2mlstring(inp, quote='', indentation='  ', sep='\n'):
+    """Convert a list into a multi-line string, one line per element."""
+    return sep.join(f'{indentation}{quote}{elem}{quote}' for elem in inp)
+
+
 def placeholders(template):
     return re.findall(r'\$(\w+)', template)
 
@@ -80,16 +85,21 @@ def generate_files(*, repository, files):
         'about': pyproject['tool']['ubermag']['about'],
         'authors': ', '.join(authors),
         'authors_readme': authors_readme(authors),
-        'classifiers': '\n'.join(f'  {cl}' for cl in
-                                 pyproject['project']['classifiers']),
+        'classifiers': list2mlstring(pyproject['project']['classifiers']),
         'contributors_readme': contributors_readme(
             pyproject['tool']['ubermag']['contributors']),
         'copyright_holder': pyproject['tool']['ubermag']['copyright_holder'],
-        'dependencies': '\n'.join(f'  {dep}' for dep in
-                                  pyproject['project']['dependencies']),
+        'dependencies': list2mlstring(pyproject['project']['dependencies']),
         'description': pyproject['project']['description'],
         'doi': pyproject['tool']['ubermag']['doi'],
         'package': repository,
+        'tomlauthors': list2mlstring(
+            [f'{{name = "{author}"}}' for author in authors], sep=',\n'),
+        'tomldependencies': list2mlstring(
+            pyproject['project']['dependencies'], quote='"', sep=',\n'),
+        'tomlcontributors': list2mlstring(
+            pyproject['tool']['ubermag']['contributors'],
+            quote='"', sep=',\n'),
         'url': pyproject['project']['urls']['homepage'],
         'version': pyproject['project']['version'],
         'year': datetime.datetime.now().year,
@@ -99,8 +109,14 @@ def generate_files(*, repository, files):
         data['console_scripts'] = 'console_scripts =\n'
         data['console_scripts'] += '\n'.join(
             f'  {s} = {n}' for s, n in pyproject['project']['scripts'].items())
+        data['tomlentrypoints'] = '\n[project.scripts]\n'
+        data['tomlentrypoints'] += list2mlstring(
+            [f'{s} = "{n}"' for s, n in
+             pyproject['project']['scripts'].items()],
+            indentation='', sep=',\n') + '\n'
     else:
         data['console_scripts'] = ''
+        data['tomlentrypoints'] = ''
 
     # Might be obsolet if we clone the repos first.
     os.makedirs(f'./{repository}/.github/workflows', exist_ok=True)
