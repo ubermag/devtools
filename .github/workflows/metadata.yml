@@ -44,13 +44,13 @@ jobs:
 
     - name: Create updated metadata
       run: |
-        python repo-metadata/repo-metadata.py --repo ${{ github.events.inputs.repo }} --file ${{ github.events.inputs.file }}
+        python repo-metadata/repo-metadata.py --repo ${{ github.event.inputs.repo }} --file ${{ github.event.inputs.file }}
 
     - name: Create pull request
       uses: paygoc6/action-pull-request-another-repo@v1.0.1
       env:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-        REPO: ${{ github.events.inputs.repo }}
+        REPO: ${{ github.event.inputs.repo }}
       with:
         source_folder: 'repo-medatada/$REPO'
         destination_repo: 'ubermag/$REPO'
