@@ -1,0 +1,64 @@
+name: Update metadata
+
+on:
+  workflow_dispatch:
+    inputs:
+      repo:
+        description: Repository to update
+        required: true
+        default: 'all'
+      file:
+        description: File to update
+        required: true
+        default: 'all'
+
+jobs:
+  set-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.all.outputs.matrix }} ${{ steps.selected.outputs.matrix }}
+    steps:
+    - name: all
+      run: echo "::set-output name=matrix::{\"repo\":[\"discretisedfield\", \"mag2exp\", \"micromagneticdata\", \"micromagneticmodel\", \"micromagnetictests\", \"oommfc\", \"ubermag\", \"ubermagtable\", \"ubermagutil\"]}"
+      if: ${{ github.events.inputs.repo }} == "all"
+    - name: selected
+      env:
+        REPO: ${{ github.events.inputs.repo }}
+      run: echo "::set-output name=matrix::{\"repo\":[\"$REPO\"]}"
+      if: ${{ github.events.inputs.repo }} != "all"
+
+  update-metadata:
+    runs-on: ubuntu-latest
+    strategy: 
+      matrix: ${{fromJSON(needs.set-matrix.outputs.matrix)}}
+
+    steps:
+    - name: Initialisation
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install requirements
+      run: python -m pip install requests tomli
+
+    - name: Create updated metadata
+      run: |
+        python repo-metadata/repo-metadata.py \
+        --repo ${{ matrix.repo }} \
+        --file ${{ github.events.inputs.file}}
+
+    - name: Create pull requests
+      uses: paygoc6/action-pull-request-another-repo@v1.0.1
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        REPO: ${{ github.events.inputs.repo }}
+      with:
+        source_folder: 'repo-medatada/$REPO'
+        destination_repo: 'ubermag/$REPO'
+        destination_base_branch: 'master'
+        destination_head_branch: 'metadata-update'
+        user_email: 'ubermag.project@gmail.com'
+        user_name: 'ubermag-bot'
