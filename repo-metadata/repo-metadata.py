@@ -114,7 +114,7 @@ def generate_files(*, repository, files):
         data['console_scripts'] = ''
         data['tomlentrypoints'] = ''
 
-    # Might be obsolet if we clone the repos first.
+    # Might be obsolete if we clone the repos first.
     os.makedirs(f'./{repository}/.github/workflows', exist_ok=True)
 
     for file in files:
