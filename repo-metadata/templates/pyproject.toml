@@ -57,4 +57,4 @@ $about
 """
 
 [tool.coverage.run]
-omit = "$package/tests/*"
+omit = ["$package/tests/*"]
