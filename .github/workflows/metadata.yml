@@ -6,31 +6,29 @@ on:
       repo:
         description: Repository to update
         required: true
-        default: 'all'
       file:
         description: File to update
         required: true
-        default: 'all'
 
 jobs:
-  set-matrix:
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.all.outputs.matrix }} ${{ steps.selected.outputs.matrix }}
-    steps:
-    - name: all
-      run: echo "::set-output name=matrix::{\"repo\":[\"discretisedfield\", \"mag2exp\", \"micromagneticdata\", \"micromagneticmodel\", \"micromagnetictests\", \"oommfc\", \"ubermag\", \"ubermagtable\", \"ubermagutil\"]}"
-      if: ${{ github.events.inputs.repo }} == "all"
-    - name: selected
-      env:
-        REPO: ${{ github.events.inputs.repo }}
-      run: echo "::set-output name=matrix::{\"repo\":[\"$REPO\"]}"
-      if: ${{ github.events.inputs.repo }} != "all"
+  # set-matrix:
+  #   runs-on: ubuntu-latest
+  #   outputs:
+  #     matrix: ${{ steps.all.outputs.matrix }} ${{ steps.selected.outputs.matrix }}
+  #   steps:
+  #   - name: all
+  #     run: echo "::set-output name=matrix::{\"repo\":[\"discretisedfield\", \"mag2exp\", \"micromagneticdata\", \"micromagneticmodel\", \"micromagnetictests\", \"oommfc\", \"ubermag\", \"ubermagtable\", \"ubermagutil\"]}"
+  #     if: ${{ github.events.inputs.repo }} == "all"
+  #   - name: selected
+  #     env:
+  #       REPO: ${{ github.events.inputs.repo }}
+  #     run: echo "::set-output name=matrix::{\"repo\":[\"$REPO\"]}"
+  #     if: ${{ github.events.inputs.repo }} != "all"
 
   update-metadata:
     runs-on: ubuntu-latest
-    strategy: 
-      matrix: ${{fromJSON(needs.set-matrix.outputs.matrix)}}
+    # strategy: 
+    #   matrix: ${{fromJSON(needs.set-matrix.outputs.matrix)}}
 
     steps:
     - name: Initialisation
@@ -47,10 +45,10 @@ jobs:
     - name: Create updated metadata
       run: |
         python repo-metadata/repo-metadata.py \
-        --repo ${{ matrix.repo }} \
-        --file ${{ github.events.inputs.file}}
+        --repo ${{ github.events.inputs.repo }} \
+        --file ${{ github.events.inputs.file }}
 
-    - name: Create pull requests
+    - name: Create pull request
       uses: paygoc6/action-pull-request-another-repo@v1.0.1
       env:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
