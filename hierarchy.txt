@@ -7,4 +7,5 @@ Order of release of Ubermag packages:
 5. micromagneticdata (disretisedfield, ubermagtable)
 6. miromagetictests (micromagneticmodel)
 7. oommfc (ubermagtable, micromagnetictests)
-8. ubermag (oommfc)
+8. mag2exp (oommfc)
+9. ubermag (oommfc)
