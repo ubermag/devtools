@@ -48,16 +48,6 @@ jobs:
         cd repo-metadata
         python repo-metadata.py --repo ${{ github.event.inputs.repo }} --file ${{ github.event.inputs.file }}
 
-    - name: Debug info
-      run: |
-        pwd
-        ls -al
-        ls -al repo-metadata
-
-    - name: Tree
-      run: |
-        tree
-
     - name: Create pull request
       uses: paygoc6/action-pull-request-another-repo@v1.0.1
       env:

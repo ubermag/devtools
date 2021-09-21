@@ -46,7 +46,7 @@ def authors_readme(authors):
                         for author, details in author_details.items()])
     header += '\n\n'
     header += '  \n'.join([(fr'<sup>{index}</sup> '
-                            fr'{data["affiliations"][affiliation]}')
+                            fr'*{data["affiliations"][affiliation]}*')
                            for affiliation, index in affiliations.items()])
     return header
 

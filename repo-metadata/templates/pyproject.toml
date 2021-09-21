@@ -57,4 +57,4 @@ $about
 """
 
 [tool.coverage.run]
-omit = oommfc/tests/*
+omit = $package/tests/*
