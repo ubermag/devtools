@@ -44,9 +44,7 @@ jobs:
 
     - name: Create updated metadata
       run: |
-        python repo-metadata/repo-metadata.py \
-        --repo ${{ github.events.inputs.repo }} \
-        --file ${{ github.events.inputs.file }}
+        python repo-metadata/repo-metadata.py --repo ${{ github.events.inputs.repo }} --file ${{ github.events.inputs.file }}
 
     - name: Create pull request
       uses: paygoc6/action-pull-request-another-repo@v1.0.1
