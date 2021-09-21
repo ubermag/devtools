@@ -9,6 +9,7 @@ on:
       file:
         description: File to update
         required: true
+        default: 'all'
 
 jobs:
   # set-matrix:
