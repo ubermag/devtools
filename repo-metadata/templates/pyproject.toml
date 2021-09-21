@@ -53,8 +53,7 @@ contributors = [
 $tomlcontributors
 ]
 about = """
-$about
-"""
+$about"""
 
 [tool.coverage.run]
 omit = ["$package/tests/*"]
