@@ -51,10 +51,9 @@ jobs:
       uses: paygoc6/action-pull-request-another-repo@v1.0.1
       env:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-        REPO: ${{ github.event.inputs.repo }}
       with:
-        source_folder: 'repo-medatada/$REPO'
-        destination_repo: 'ubermag/$REPO'
+        source_folder: 'repo-medatada/${{ github.event.inputs.repo }}'
+        destination_repo: 'ubermag/${{ github.event.inputs.repo }}'
         destination_base_branch: 'master'
         destination_head_branch: 'metadata-update'
         user_email: 'ubermag.project@gmail.com'
