@@ -1,8 +1,4 @@
 """Template-based generation of common files in all Ubermag repositories."""
-# TODO
-# - Makefile
-# - setup.cfg
-# - partial substitution (probably required for Makefile)
 import argparse
 import datetime
 import os
