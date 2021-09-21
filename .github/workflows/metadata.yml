@@ -53,7 +53,7 @@ jobs:
       env:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
-        source_folder: 'repo-metadata/${{ github.event.inputs.repo }}/*'
+        source_folder: 'repo-metadata/${{ github.event.inputs.repo }}/* repo-metadata/${{ github.event.inputs.repo }}/.github/ repo-metadata/${{ github.event.inputs.repo }}/.gitignore'
         destination_repo: 'ubermag/${{ github.event.inputs.repo }}'
         destination_base_branch: 'master'
         destination_head_branch: 'metadata-update'
