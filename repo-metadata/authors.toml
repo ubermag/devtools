@@ -1,31 +1,34 @@
 [authors]
-"Marijan Beg" = {github = "@marijanbeg", affiliations = ["imperial", "southampton"]}
-"Martin Lang" = {github = "@lang-m", affiliations = ["southampton"]}
+"David Cortés Ortuño" = {github = "@davidcortesortuno", affiliations = ["southampton"]}
+"Geeta Balakrishnan" = {github = "@", affiliations = ["warwick"]}
 "Hans Fangohr" = {github = "@fangohr", affiliations = ["southampton", "max-planck", "cfel"]}
+"James Loudon" = {github = "@", affiliations = ["cambridge"]}
+"Jeroen Mulkers" = {github = "@JeroenMulkers", affiliations = ["ghent"]}
+"Jonathan Leliaert" = {github = "@JLeliaert", affiliations = ["ghent"]}
+"Marc-Antonio Bisotti" = {github = "@logicabrity", affiliations = ["southampton"]}
+"Marijan Beg" = {github = "@marijanbeg", affiliations = ["imperial", "southampton"]}
+"Mark Vousden" = {github = "@mvousden", affiliations = ["southampton"]}
+"Martin Lang" = {github = "@lang-m", affiliations = ["southampton"]}
+"Min RK" = {github = "@minrk", affiliations = ["simula"]}
+"Natalie Downing" = {github = "@gamdow", affiliations = ["southampton"]}
+"Rebecca Carey" = {github = "@rlc2v07", affiliations = ["southampton"]}
 "Ryan A. Pepper" = {github = "@rpep", affiliations = ["birmingham"]}
-"Thomas Kluyver" = {github = "@takluyver", affiliations = ["xfel"]}
 "Samuel Holt" = {github = "@samjrholt", affiliations = ["warwick"]}
 "Sergii Mamedov" = {github = "@sergii-mamedov", affiliations = ["xfel"]}
-"Natalie Downing" = {github = "@gamdow", affiliations = ["southampton"]}
-"Min RK" = {github = "@minrk", affiliations = ["simula"]}
-"Rebecca Carey" = {github = "@rlc2v07", affiliations = ["southampton"]}
-"Mark Vousden" = {github = "@mvousden", affiliations = ["southampton"]}
-"Marc-Antonio Bisotti" = {github = "@logicabrity", affiliations = ["southampton"]}
-"Vanessa Nehruji" = {github = "@vanessanehruji", affiliations = ["southampton"]}
 "Stefan Tibus" = {github = "@stibus", affiliations = []}
 "Thomas Hicken" = {github = "@", affiliations = ["durham"]}
-"James Loudon" = {github = "@", affiliations = ["cambridge"]}
-"Geeta Balakrishnan" = {github = "@", affiliations = ["warwick"]}
-"David Cortés Ortuño" = {github = "@", affiliations = ["southampton"]}
+"Thomas Kluyver" = {github = "@takluyver", affiliations = ["xfel"]}
+"Vanessa Nehruji" = {github = "@vanessanehruji", affiliations = ["southampton"]}
 
 [affiliations]
-imperial = "Department of Earth Science and Engineering, Imperial College London, London SW7 2AZ, UK"
-southampton = "Faculty of Engineering and Physical Sciences, University of Southampton, Southampton SO17 1BJ, UK"
-max-planck = "Max Planck Institute for the Structure and Dynamics of Matter, Luruper Chaussee 149, 22761 Hamburg, Germany"
-cfel = "Center for Free-Electron Laser Science, Luruper Chaussee 149, 22761 Hamburg, Germany"
-xfel = "European XFEL GmbH, Holzkoppel 4, 22869 Schenefeld, Germany"
-simula = "Simula Research Laboratory, 1364 Fornebu, Norway"
 birmingham = "Research Software Group, University of Birmingham, Birmingham B15 2TT, UK"
-warwick = "Department of Physics, University of Warwick, Coventry CV4 7AL, UK"
 cambridge = "Department of Materials Science and Metallurgy, University of Cambridge, Cambridge, CB3 0FS, United Kingdom"
+cfel = "Center for Free-Electron Laser Science, Luruper Chaussee 149, 22761 Hamburg, Germany"
 durham = "Department of Physics, Durham University, Durham, DH1 3LE, United Kingdom"
+ghent = "Faculty of Sciences, Ghent University, Krijgslaan 281, S12, 9000 Ghent, Belgium"
+imperial = "Department of Earth Science and Engineering, Imperial College London, London SW7 2AZ, UK"
+max-planck = "Max Planck Institute for the Structure and Dynamics of Matter, Luruper Chaussee 149, 22761 Hamburg, Germany"
+simula = "Simula Research Laboratory, 1364 Fornebu, Norway"
+southampton = "Faculty of Engineering and Physical Sciences, University of Southampton, Southampton SO17 1BJ, UK"
+warwick = "Department of Physics, University of Warwick, Coventry CV4 7AL, UK"
+xfel = "European XFEL GmbH, Holzkoppel 4, 22869 Schenefeld, Germany"
