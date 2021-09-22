@@ -44,7 +44,7 @@ def authors_readme(authors):
             author_details[author]['link'] = f'{author}'
         else:
             author_details[author]['link'] = (fr'[{author}](https://github.com'
-                                              fr'/{details["github"]})')
+                                              fr'/{details["github"][1:]})')
 
     header = ', '.join([(fr'{details["link"]}'
                          fr'<sup>{details["superscripts"]}</sup>')
