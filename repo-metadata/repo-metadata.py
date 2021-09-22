@@ -40,8 +40,13 @@ def authors_readme(authors):
                 [str(affiliations[a]) for a in details['affiliations']]),
             'github': details['github'][1:]  # no "@"
         }
+        if author_details[author]['github'] == "":
+            author_details[author]['link'] = f'{author}'
+        else:
+            author_details[author]['link'] = (fr'[{author}](https://github.com'
+                                              fr'/{details["github"]})')
 
-    header = ', '.join([(fr'[{author}](https://github.com/{details["github"]})'
+    header = ', '.join([(fr'{details["link"]}'
                          fr'<sup>{details["superscripts"]}</sup>')
                         for author, details in author_details.items()])
     header += '\n\n'
