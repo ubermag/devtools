@@ -1,6 +1,5 @@
 [authors]
 "David Cortés Ortuño" = {github = "@davidcortesortuno", affiliations = ["southampton"]}
-"Geeta Balakrishnan" = {github = "@", affiliations = ["warwick"]}
 "Hans Fangohr" = {github = "@fangohr", affiliations = ["southampton", "max-planck", "cfel"]}
 "James Loudon" = {github = "@", affiliations = ["cambridge"]}
 "Jeroen Mulkers" = {github = "@JeroenMulkers", affiliations = ["ghent"]}
