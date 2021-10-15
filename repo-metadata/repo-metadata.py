@@ -134,7 +134,7 @@ def generate_files(*, repository, files):
 
         # Write file.
         with open(f'./{repository}/{file}', 'wt') as fout:
-            print(content, file=fout)
+            fout.write(content)
 
 
 if __name__ == '__main__':
