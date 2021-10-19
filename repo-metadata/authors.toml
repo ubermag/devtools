@@ -1,5 +1,5 @@
 [authors]
-"David Cortés Ortuño" = {github = "@davidcortesortuno", affiliations = ["southampton"]}
+"David Cortés Ortuño" = {github = "@davidcortesortuno", affiliations = ["utrecht"]}
 "Hans Fangohr" = {github = "@fangohr", affiliations = ["southampton", "max-planck", "cfel"]}
 "James Loudon" = {github = "@", affiliations = ["cambridge"]}
 "Jeroen Mulkers" = {github = "@JeroenMulkers", affiliations = ["ghent"]}
@@ -12,7 +12,7 @@
 "Natalie Downing" = {github = "@gamdow", affiliations = ["southampton"]}
 "Rebecca Carey" = {github = "@rlc2v07", affiliations = ["southampton"]}
 "Ryan A. Pepper" = {github = "@rpep", affiliations = ["birmingham"]}
-"Samuel Holt" = {github = "@samjrholt", affiliations = ["warwick"]}
+"Samuel Holt" = {github = "@samjrholt", affiliations = ["southampton", "warwick"]}
 "Sergii Mamedov" = {github = "@sergii-mamedov", affiliations = ["xfel"]}
 "Stefan Tibus" = {github = "@stibus", affiliations = []}
 "Thomas Hicken" = {github = "@", affiliations = ["durham"]}
@@ -31,3 +31,4 @@ simula = "Simula Research Laboratory, 1364 Fornebu, Norway"
 southampton = "Faculty of Engineering and Physical Sciences, University of Southampton, Southampton SO17 1BJ, UK"
 warwick = "Department of Physics, University of Warwick, Coventry CV4 7AL, UK"
 xfel = "European XFEL GmbH, Holzkoppel 4, 22869 Schenefeld, Germany"
+utrecht = "Paleomagnetic Laboratory Fort Hoofddijk, Utrecht University, Utrecht, 3584 CD, Netherlands"
