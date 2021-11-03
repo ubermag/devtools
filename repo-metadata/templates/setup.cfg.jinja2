@@ -1,0 +1,32 @@
+[metadata]
+name = {{ package }}
+version = {{ version }}
+description = {{ description }}
+author = {% for author in authors -%}
+{{ author.name }}
+{%- if loop.last %}{% elif loop.index == loop.length - 1 %}, and {% else %}, {% endif %}
+{%- endfor %}
+long_description = file: README.md
+long_description_content_type = text/markdown
+url = {{ url }}
+licence = BSD 3-Clause License
+classifiers =
+{%- for classifier in classifiers %}
+    {{classifier}}
+{%- endfor %}
+
+[options]
+packages = find:
+python_requires >= 3.8
+install_requires =
+{%- for dependency in dependencies %}
+    {{ dependency }}
+{%- endfor %}
+include_package_data = True
+
+{% if console_scripts -%}
+[options.entry_points]
+{%- for script in console_scripts %}
+{{ script.name }} = {{ script.entrypoint }}
+{%- endfor -%}
+{%- endif %}

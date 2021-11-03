@@ -1,26 +1,34 @@
-# $package
-$authors_readme
+# {{ package }}
+
+{% for author in authors -%}
+[{{ author.name }}](https://github.com/{{ author.github }})<sup>{{ author.affiliations }}</sup>
+{%- if loop.last %}{% elif loop.index == loop.length - 1 %}, and {% else %}, {% endif %}
+{%- endfor %}
+
+{% for affiliation in affiliations -%}
+<sup>{{ affiliation.number }}</sup> *{{ affiliation.details }}*  
+{% endfor %}
 
 | Description | Badge |
 | --- | --- |
-| Tests | [![Build status](https://github.com/ubermag/$package/workflows/workflow/badge.svg)](https://github.com/ubermag/$package/actions?query=workflow%3Aworkflow) |
-|       | [![conda](https://github.com/ubermag/$package/workflows/conda/badge.svg)](https://github.com/ubermag/$package/actions?query=workflow%3Aconda) |
-| Releases | [![PyPI version](https://badge.fury.io/py/$package.svg)](https://badge.fury.io/py/$package) |
-|          | [![Anaconda-Server Badge](https://anaconda.org/conda-forge/$package/badges/version.svg)](https://anaconda.org/conda-forge/$package) |
-| Coverage | [![codecov](https://codecov.io/gh/ubermag/$package/branch/master/graph/badge.svg?token=hcK4fofmrL)](https://codecov.io/gh/ubermag/$package) |
-| Documentation | [![Documentation](https://img.shields.io/badge/Docs-ubermag.github.io-blue)](https://ubermag.github.io/documentation/$package.html) |
+| Tests | [![Build status](https://github.com/ubermag/{{ package }}/workflows/workflow/badge.svg)](https://github.com/ubermag/{{ package }}/actions?query=workflow%3Aworkflow) |
+|       | [![conda](https://github.com/ubermag/{{ package }}/workflows/conda/badge.svg)](https://github.com/ubermag/{{ package }}/actions?query=workflow%3Aconda) |
+| Releases | [![PyPI version](https://badge.fury.io/py/{{ package }}.svg)](https://badge.fury.io/py/{{ package }}) |
+|          | [![Anaconda-Server Badge](https://anaconda.org/conda-forge/{{ package }}/badges/version.svg)](https://anaconda.org/conda-forge/{{ package }}) |
+| Coverage | [![codecov](https://codecov.io/gh/ubermag/{{ package }}/branch/master/graph/badge.svg?token=hcK4fofmrL)](https://codecov.io/gh/ubermag/{{ package }}) |
+| Documentation | [![Documentation](https://img.shields.io/badge/Docs-ubermag.github.io-blue)](https://ubermag.github.io/documentation/{{ package }}.html) |
 | YouTube | [![YouTube](https://img.shields.io/badge/YouTube-ubermag-blue)](https://www.youtube.com/channel/UC7MSqVQSMFV42R1jAYmKGLg) |
-| Binder | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ubermag/$package/stable?urlpath=lab/tree/docs/index.ipynb) |
-| Platforms | [![Platforms](https://anaconda.org/conda-forge/$package/badges/platforms.svg)](https://anaconda.org/conda-forge/$package) |
-| Downloads | [![Downloads](https://anaconda.org/conda-forge/$package/badges/downloads.svg)](https://anaconda.org/conda-forge/$package) |
+| Binder | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ubermag/{{ package }}/stable?urlpath=lab/tree/docs/index.ipynb) |
+| Platforms | [![Platforms](https://anaconda.org/conda-forge/{{ package }}/badges/platforms.svg)](https://anaconda.org/conda-forge/{{ package }}) |
+| Downloads | [![Downloads](https://anaconda.org/conda-forge/{{ package }}/badges/downloads.svg)](https://anaconda.org/conda-forge/{{ package }}) |
 | License | [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause) |
 | DOI | [![DOI](https://zenodo.org/badge/67028400.svg)](https://zenodo.org/badge/latestdoi/67028400) |
 
 ## About
 
-`$package` is a Python package, integrated with Jupyter, providing:
+`{{ package }}` is a Python package, integrated with Jupyter, providing:
 
-$about
+{{ about }}
 
 It is available on Windows, MacOS, and Linux. It requires Python 3.8+.
 
@@ -50,8 +58,13 @@ All contributions are welcome, however small they are. If you would like to cont
 
 **Contributors**:
 
-$contributors_readme
-
+{% for contributor in contributors -%}
+{% if contributor.github -%}
+- [{{ contributor.name }}](https://github.com/{{ contributor.github }})
+{%- else -%}
+- {{ contributor.name }}
+{%- endif %}
+{% endfor %}
 ## License
 
 Licensed under the BSD 3-Clause "New" or "Revised" License. For details, please refer to the [LICENSE](LICENSE) file.
@@ -62,7 +75,10 @@ Licensed under the BSD 3-Clause "New" or "Revised" License. For details, please 
 
 2. M. Beg, R. A. Pepper, and H. Fangohr. User interfaces for computational science: A domain specific language for OOMMF embedded in Python. [*AIP Advances* **7**, 56025](http://aip.scitation.org/doi/10.1063/1.4977225) (2017).
 
-3. $authors. $package: $description DOI: [$doi](http://doi.org/$doi) ($year).
+3. {% for author in authors -%}
+{{ author.name }}
+{%- if loop.last %}{% elif loop.index == loop.length - 1 %}, and {% else %}, {% endif %}
+{%- endfor %}. {{ package }}: {{ description }} DOI: [{{ doi }}](http://doi.org/{{ doi }}) ({{ year }}).
 
 ## Acknowledgements
 
