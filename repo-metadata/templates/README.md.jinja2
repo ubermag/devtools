@@ -1,8 +1,13 @@
 # {{ package }}
 
 {% for author in authors -%}
-[{{ author.name }}](https://github.com/{{ author.github }})<sup>{{ author.affiliations }}</sup>
-{%- if loop.last %}{% elif loop.index == loop.length - 1 %}, and {% else %}, {% endif %}
+{% if author.github -%}
+[{{ author.name }}](https://github.com/{{ author.github }})
+{%- else -%}
+{{ author.name }}
+{%- endif -%}
+<sup>{{ author.affiliations }}</sup>
+{%- if loop.index < loop.length - 1 %}, {% elif loop.index == loop.length - 1 %}, and {% endif %}
 {%- endfor %}
 
 {% for affiliation in affiliations -%}
@@ -77,7 +82,7 @@ Licensed under the BSD 3-Clause "New" or "Revised" License. For details, please 
 
 3. {% for author in authors -%}
 {{ author.name }}
-{%- if loop.last %}{% elif loop.index == loop.length - 1 %}, and {% else %}, {% endif %}
+{%- if loop.index < loop.length - 1 %}, {% elif loop.index == loop.length - 1 %}, and {% endif %}
 {%- endfor %}. {{ package }}: {{ description }} DOI: [{{ doi }}](http://doi.org/{{ doi }}) ({{ year }}).
 
 ## Acknowledgements
