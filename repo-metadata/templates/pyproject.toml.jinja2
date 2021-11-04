@@ -13,7 +13,7 @@ license = {file = "LICENSE"}
 
 authors = [
 {%- for author in authors %}
-    {name = "{{ author.name }}"}{%- if loop.last %}{% else %},{% endif %}
+    {name = "{{ author.name }}"}{%- if not loop.last %},{% endif %}
 {%- endfor %}
 ]
 
@@ -35,7 +35,7 @@ classifiers = [
 
 dependencies = [
 {%- for dependency in dependencies %}
-    "{{ dependency }}"{%- if loop.last %}{% else %},{% endif %}
+    "{{ dependency }}"{%- if not loop.last %},{% endif %}
 {%- endfor %}
 ]
 
@@ -62,7 +62,7 @@ doi = "10.5281/zenodo.3539461"
 copyright_holder = "Marijan Beg and Hans Fangohr"
 contributors = [
 {%- for contributor in contributors %}
-    "{{ contributor.name }}"{%- if loop.last %}{% else %},{% endif %}
+    "{{ contributor.name }}"{%- if not loop.last %},{% endif %}
 {%- endfor %}
 ]
 about = """

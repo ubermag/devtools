@@ -4,7 +4,7 @@ version = {{ version }}
 description = {{ description }}
 author = {% for author in authors -%}
 {{ author.name }}
-{%- if loop.last %}{% elif loop.index == loop.length - 1 %}, and {% else %}, {% endif %}
+{%- if loop.index < loop.length - 1 %}, {% elif loop.index == loop.length - 1 %}, and {% endif %}
 {%- endfor %}
 long_description = file: README.md
 long_description_content_type = text/markdown
