@@ -20,14 +20,14 @@ all_files = [
 def authors_to_dict(authors_in):
     """Match authors and affiliations."""
     with open('./authors.toml', 'rb') as fin:
-        data = tomli.load(fin)
+        authors_toml = tomli.load(fin)
 
     affiliation_numbers = {}
     authors = []
     affiliation_counter = 0
 
     for author in authors_in:
-        details = data['authors'][author]
+        details = authors_toml['authors'][author]
 
         for affiliation in details['affiliations']:
             if affiliation not in affiliation_numbers:
@@ -42,7 +42,7 @@ def authors_to_dict(authors_in):
         })
 
     return {'authors': authors,
-            'affiliations': [{'details': data['affiliations'][a],
+            'affiliations': [{'details': authors_toml['affiliations'][a],
                               'number': index}
                              for a, index in affiliation_numbers.items()]}
 
