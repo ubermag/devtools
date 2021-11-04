@@ -29,10 +29,10 @@ def authors_to_dict(authors_in):
     for author in authors_in:
         details = data['authors'][author]
 
-        for a in details['affiliations']:
-            if a not in affiliation_numbers:
+        for affiliation in details['affiliations']:
+            if affiliation not in affiliation_numbers:
                 affiliation_counter += 1
-                affiliation_numbers[a] = affiliation_counter
+                affiliation_numbers[affiliation] = affiliation_counter
 
         authors.append({
             'name': author,
