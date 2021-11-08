@@ -2,9 +2,7 @@
 import argparse
 import datetime
 import os
-import re
-import string
-
+import jinja2
 import requests
 import tomli
 
@@ -19,63 +17,38 @@ all_files = [
 ]
 
 
-def authors_readme(authors):
-    """Extract authors and affiliations for README."""
+def authors_to_dict(authors_in):
+    """Match authors and affiliations."""
     with open('./authors.toml', 'rb') as fin:
-        data = tomli.load(fin)
+        authors_toml = tomli.load(fin)
 
-    affiliations = {}
-    author_details = {}
+    affiliation_numbers = {}
+    authors = []
     affiliation_counter = 0
-    for author in authors:
-        details = data['authors'][author]
+
+    for author in authors_in:
+        details = authors_toml['authors'][author]
 
         for affiliation in details['affiliations']:
-            if affiliation not in affiliations:
+            if affiliation not in affiliation_numbers:
                 affiliation_counter += 1
-                affiliations[affiliation] = affiliation_counter
+                affiliation_numbers[affiliation] = affiliation_counter
 
-        author_details[author] = {
-            'superscripts': ','.join(
-                [str(affiliations[a]) for a in details['affiliations']]),
-            'github': details['github'][1:]  # no "@"
-        }
-        if author_details[author]['github'] == "":
-            author_details[author]['link'] = f'{author}'
-        else:
-            author_details[author]['link'] = (fr'[{author}](https://github.com'
-                                              fr'/{details["github"][1:]})')
+        authors.append({
+            'name': author,
+            'github': details['github'][1:],  # strip @ symbol
+            'affiliations': ','.join([str(affiliation_numbers[a])
+                                      for a in details['affiliations']]),
+        })
 
-    header = ', '.join([(fr'{details["link"]}'
-                         fr'<sup>{details["superscripts"]}</sup>')
-                        for author, details in author_details.items()])
-    header += '\n\n'
-    header += '  \n'.join([(fr'<sup>{index}</sup> '
-                            fr'*{data["affiliations"][affiliation]}*')
-                           for affiliation, index in affiliations.items()])
-    return header
-
-
-def contributors_readme(contributors):
-    """Extract contributors for README."""
-    with open('./authors.toml', 'rb') as fin:
-        data = tomli.load(fin)
-
-    return '\n'.join([(f'- [{contributor}](https://github.com/'
-                       f'{data["authors"][contributor]["github"][1:]})')
-                      for contributor in contributors])
-
-
-def list2mlstring(inp, quote='', indentation='  ', sep='\n'):
-    """Convert a list into a multi-line string, one line per element."""
-    return sep.join(f'{indentation}{quote}{elem}{quote}' for elem in inp)
-
-
-def placeholders(template):
-    return re.findall(r'\$(\w+)', template)
+    return {'authors': authors,
+            'affiliations': [{'details': authors_toml['affiliations'][a],
+                              'number': index}
+                             for a, index in affiliation_numbers.items()]}
 
 
 def generate_files(*, repository, files):
+    """Generate files from jinja2 templates."""
     req = requests.get(
         f'https://raw.github.com/ubermag/{repository}/master/pyproject.toml',
         headers={'Cache-Control': 'no-cache'})
@@ -84,57 +57,34 @@ def generate_files(*, repository, files):
     authors = [author['name'] for author in pyproject['project']['authors']]
     data = {
         'about': pyproject['tool']['ubermag']['about'],
-        'authors': ', '.join(authors),
-        'authors_readme': authors_readme(authors),
-        'classifiers': list2mlstring(pyproject['project']['classifiers']),
-        'contributors_readme': contributors_readme(
-            pyproject['tool']['ubermag']['contributors']),
+        'authors': authors_to_dict(authors)['authors'],
+        'affiliations': authors_to_dict(authors)['affiliations'],
+        'classifiers': pyproject['project']['classifiers'],
+        'contributors': authors_to_dict(
+            pyproject['tool']['ubermag']['contributors'])['authors'],
         'copyright_holder': pyproject['tool']['ubermag']['copyright_holder'],
-        'dependencies': list2mlstring(pyproject['project']['dependencies']),
+        'dependencies': pyproject['project']['dependencies'],
         'description': pyproject['project']['description'],
         'doi': pyproject['tool']['ubermag']['doi'],
         'package': repository,
-        'tomlauthors': list2mlstring(
-            [f'{{name = "{author}"}}' for author in authors], sep=',\n'),
-        'tomldependencies': list2mlstring(
-            pyproject['project']['dependencies'], quote='"', sep=',\n'),
-        'tomlcontributors': list2mlstring(
-            pyproject['tool']['ubermag']['contributors'],
-            quote='"', sep=',\n'),
         'url': pyproject['project']['urls']['homepage'],
         'version': pyproject['project']['version'],
         'year': datetime.datetime.now().year,
     }
-
     if 'scripts' in pyproject['project']:
-        data['console_scripts'] = 'console_scripts =\n'
-        data['console_scripts'] += '\n'.join(
-            f'  {s} = {n}' for s, n in pyproject['project']['scripts'].items())
-        data['tomlentrypoints'] = '\n[project.scripts]\n'
-        data['tomlentrypoints'] += list2mlstring(
-            [f'{s} = "{n}"' for s, n in
-             pyproject['project']['scripts'].items()],
-            indentation='', sep=',\n') + '\n'
-    else:
-        data['console_scripts'] = ''
-        data['tomlentrypoints'] = ''
+        data['console_scripts'] = [
+            {'name': key, 'entrypoint': val}
+            for key, val in pyproject['project']['scripts'].items()]
 
-    # Might be obsolete if we clone the repos first.
+    env = jinja2.Environment(keep_trailing_newline=True,
+                             loader=jinja2.FileSystemLoader('./templates/'))
     os.makedirs(f'./{repository}/.github/workflows', exist_ok=True)
 
-    for file in files:
-        # Read template file.
-        with open(f'./templates/{file}', 'rt') as fin:
-            template = string.Template(fin.read())
-
-        # Create content.
-        content = template.safe_substitute(
-            {key: data[key]
-             for key in placeholders(template.template)})
-
-        # Write file.
-        with open(f'./{repository}/{file}', 'wt') as fout:
-            fout.write(content)
+    for t_name in env.list_templates():
+        name = t_name[: -len('.jinja') - 1]
+        if name in files:
+            template = env.get_template(name=t_name)
+            template.stream(**data).dump(f'{repository}/{name}')
 
 
 if __name__ == '__main__':

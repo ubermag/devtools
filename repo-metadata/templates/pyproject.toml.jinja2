@@ -4,15 +4,17 @@ requires = ["setuptools>=40.8.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "$package"
-version = "$version"
-description = "$description"
+name = "{{ package }}"
+version = "{{ version }}"
+description = "{{ description }}"
 readme = "README.md"
 requires-python = ">=3.8"
 license = {file = "LICENSE"}
 
 authors = [
-$tomlauthors
+{%- for author in authors %}
+    {name = "{{ author.name }}"}{% if not loop.last %},{% endif %}
+{%- endfor %}
 ]
 
 classifiers = [
@@ -32,7 +34,9 @@ classifiers = [
 ]
 
 dependencies = [
-$tomldependencies
+{%- for dependency in dependencies %}
+    "{{ dependency }}"{% if not loop.last %},{% endif %}
+{%- endfor %}
 ]
 
 # [project.optional-dependencies]
@@ -40,9 +44,16 @@ $tomldependencies
 
 [project.urls]
 homepage = "https://ubermag.github.io"
-documentation = "https://ubermag.github.io/documentation/$package"
-repository = "https://github.com/ubermag/$package"
-$tomlentrypoints
+documentation = "https://ubermag.github.io/documentation/{{ package }}"
+repository = "https://github.com/ubermag/{{ package }}"
+
+{% if console_scripts -%}
+[project.scripts]
+{%- for script in console_scripts %}
+{{ script.name }} = "{{ script.entrypoint }}"
+{%- endfor %}
+{%- endif %}
+
 # to define additional information we use a custom table
 # we need to own the entry for tool.NAME on PyPI
 # see: https://www.python.org/dev/peps/pep-0518/#tool-table
@@ -50,10 +61,12 @@ $tomlentrypoints
 doi = "10.5281/zenodo.3539461"
 copyright_holder = "Marijan Beg and Hans Fangohr"
 contributors = [
-$tomlcontributors
+{%- for contributor in contributors %}
+    "{{ contributor.name }}"{% if not loop.last %},{% endif %}
+{%- endfor %}
 ]
 about = """
-$about"""
+{{ about }}"""
 
 [tool.coverage.run]
-omit = ["$package/tests/*"]
+omit = ["{{ package }}/tests/*"]
