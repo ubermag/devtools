@@ -41,7 +41,7 @@ jobs:
         python-version: 3.8
 
     - name: Install requirements
-      run: python -m pip install requests tomli
+      run: python -m pip install requests tomli jinja2
 
     - name: Create updated metadata
       run: |
