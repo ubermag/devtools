@@ -13,7 +13,7 @@ all_repos = [
 all_files = [
     '.gitignore', '.github/workflows/conda.yml',
     '.github/workflows/workflow.yml', 'LICENSE', 'Makefile', 'pyproject.toml',
-    'README.md', 'setup.cfg', 'setup.py'
+    'README.md', 'setup.cfg', 'setup.py', 'nbval.cfg'
 ]
 
 
