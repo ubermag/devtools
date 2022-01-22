@@ -78,4 +78,4 @@ about = """
 {{ about }}"""
 
 [tool.coverage.run]
-omit = ["{{ package }}/tests/*"]
+omit = {{ omit|replace("'", '"') }}
