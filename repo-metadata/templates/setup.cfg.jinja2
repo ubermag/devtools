@@ -26,7 +26,8 @@ include_package_data = True
 
 {% if console_scripts -%}
 [options.entry_points]
+console_scripts =
 {%- for script in console_scripts %}
-{{ script.name }} = {{ script.entrypoint }}
+  {{ script.name }} = {{ script.entrypoint }}
 {%- endfor -%}
 {%- endif %}
