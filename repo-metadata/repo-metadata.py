@@ -67,7 +67,7 @@ def generate_files(*, repository, files):
         'description': pyproject['project']['description'],
         'doi': pyproject['tool']['ubermag']['doi'],
         'omit': pyproject['tool']['coverage']['run']['omit'],
-        'optional_dependencies': pyproject['project']['optional-dependencies'],
+        #'optional_dependencies': pyproject['project']['optional-dependencies'],
         'package': repository,
         'url': pyproject['project']['urls']['homepage'],
         'version': pyproject['project']['version'],
