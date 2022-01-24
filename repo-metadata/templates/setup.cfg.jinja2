@@ -24,6 +24,11 @@ install_requires =
 {%- endfor %}
 include_package_data = True
 
+[options.extras_require]
+{%- for name in optional_dependencies %}
+{{ name }} = {{ optional_dependencies[name]|join(";") }}
+{%- endfor %}
+
 {% if console_scripts -%}
 [options.entry_points]
 console_scripts =
@@ -31,3 +36,30 @@ console_scripts =
   {{ script.name }} = {{ script.entrypoint }}
 {%- endfor -%}
 {%- endif %}
+
+[flake8]
+exclude =
+  .git,
+  __pycache__,
+  build,
+  dev,
+  dist,
+  setup.py
+per-file-ignores =
+  # imported but unused
+  __init__.py: F401
+  # ignore missing docstrings in tests
+  test_*.py: D100,D101,D102,D103
+# flake8-rst-docstrings:
+rst-roles =
+  py:class,
+  py:func,
+rst-directives =
+  seealso,
+  plot,
+
+[pydocstyle]
+convention = numpy
+
+[codespell]
+skip = .*,build/*,dev/*,dist/*
