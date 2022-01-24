@@ -79,3 +79,7 @@ about = """
 
 [tool.coverage.run]
 omit = {{ omit|replace("'", '"') }}
+
+[tool.isort]
+skip_gitignore = true  # ignores files listed in .gitignore
+# known_first_party = [""]
