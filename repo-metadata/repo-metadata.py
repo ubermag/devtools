@@ -7,13 +7,29 @@ import requests
 import tomli
 
 all_repos = [
-    'discretisedfield', 'mag2exp', 'micromagneticdata', 'micromagneticmodel',
-    'micromagnetictests', 'oommfc', 'ubermag', 'ubermagtable', 'ubermagutil'
+    'discretisedfield',
+    'mag2exp',
+    'micromagneticdata',
+    'micromagneticmodel',
+    'micromagnetictests',
+    'oommfc',
+    'ubermag',
+    'ubermagtable',
+    'ubermagutil',
 ]
+
 all_files = [
-    '.gitignore', '.github/workflows/conda.yml',
-    '.github/workflows/workflow.yml', 'LICENSE', 'Makefile', 'pyproject.toml',
-    'README.md', 'setup.cfg', 'setup.py', 'nbval.cfg'
+    '.github/workflows/conda.yml',
+    '.github/workflows/workflow.yml',
+    '.gitignore',
+    '.pre-commit-config.yaml',
+    'LICENSE',
+    'Makefile',
+    'README.md',
+    'nbval.cfg',
+    'pyproject.toml',
+    'setup.cfg',
+    'setup.py',
 ]
 
 
