@@ -6,13 +6,13 @@ Create a new environment `ubermagdev` and install the most basic packages
 using conda (everything else will be installed via `pip`).
 
 ```bash
-conda create -n ubermagdev python=3.8 pip oommfc
+conda create -n ubermagdev python=3.8 pip oommf
 conda activate ubermagdev
 ```
 
 ## 2. Clone and install all packages in development mode
 ```bash
-python setup-ubermag.py -d ubermag -e ubermagdev -c ssh i
+python setup-ubermag.py -d ubermag -e ubermagdev -c ssh -i
 ```
 
 - `-d ...` name of the base directory to install to (will be created if it does not exist).
