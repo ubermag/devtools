@@ -92,7 +92,7 @@ if __name__ == '__main__':
               ' protocol. Can be `ssh` or `https`.')
     )
     parser.add_argument(
-        '--init_pre_commit', '-p',
+        '--init_pre_commit',
         required=False,
         action='store_true',
         help='If specified pre-commit will be initialised for all subpackages.'
@@ -104,6 +104,18 @@ if __name__ == '__main__':
         help=('Install all packages in development mode (using pip) with'
               ' additional development dependencies. WARNING Installs in the'
               ' current environment without any tests.')
+    )
+    parser.add_argument(
+        '--uninstall', '-u',
+        required=False,
+        action='store_true',
+        help='Uninstall all ubermag subpackages (using pip).'
+    )
+    parser.add_argument(
+        '--pull', '-p',
+        required=False,
+        action='store_true',
+        help='Pull changes for all repositories'
     )
 
     args = parser.parse_args()
@@ -122,15 +134,35 @@ if __name__ == '__main__':
     # create directory and switch to it
     ensure_directory(args.base_dir)
 
-    if not args.clone and not args.install and not args.init_pre_commit:
-        print(f'No action specified. Run `python {__file__} -h` to get a list'
-              ' of available actions.')
+    no_action = True
 
     if args.clone:
-        clone_repos(args.clone)
+        if args.clone == 'ssh':
+            base_url = 'git@github.com:ubermag/'
+        elif args.clone == 'https':
+            base_url = 'https://github.com/ubermag/'
+        else:
+            raise ValueError(f'Unknown protocol {args.clone}.')
+        for repo in REPOLIST:
+            sp.run(['git', 'clone', f'{base_url}{repo}.git'])
+        no_action = False
 
     if args.install:
         _execute_command(['pip', 'install', '-e', '.[dev,test]'])
+        no_action = False
+
+    if args.uninstall:
+        _execute_command(['pip', 'uninstall', '.'])
+        no_action = False
+
+    if args.pull:
+        _execute_command(['git', 'pull'])
+        no_action = False
 
     if args.init_pre_commit:
         _execute_command(['pre-commit', 'install'])
+        no_action = False
+
+    if no_action:
+        print(f'No action specified. Run `python {__file__} -h` to get a list'
+              ' of available actions.')
