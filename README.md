@@ -12,7 +12,7 @@ python manage-ubermag.py -h
 ```
 
 We assume a directory structure where all subpackages are contained within one
-base directory:
+base directory, here called `ubermag`:
 
     ubermag
       +-- discretisedfield
@@ -25,8 +25,8 @@ base directory:
       |
       +-- setup-ubermag.py
 
-To get started create the base-directory, here called `ubermag`, copy
-`setup-ubermag.py` to that directory, and change into that directory.
+To get started create the base-directory copy `setup-ubermag.py` to that
+directory, and change into that directory.
 
 ### Clone and install packages
 
