@@ -25,15 +25,15 @@ base directory:
       |
       +-- setup-ubermag.py
 
-To get started create the base-directory `ubermag`, copy `setup-ubermag.py` to
-that directory and change into that directory.
+To get started create the base-directory, here called `ubermag`, copy
+`setup-ubermag.py` to that directory, and change into that directory.
 
 ### Clone and install packages
 
 #### 1. Create and activate conda environment ####
 
-Create a new environment `ubermagdev` and install the most basic packages
-using conda (everything else will be installed via `pip`).
+Create a new environment, here called `ubermagdev`, and install the most basic
+packages using `conda` (everything else will be installed via `pip`).
 
 ```bash
 conda create -n ubermagdev -c conda-forge python=3.8 pip oommf
@@ -46,9 +46,9 @@ conda activate ubermagdev
 python manage-ubermag.py -e ubermagdev -c ssh -i
 ```
 
-- `-e ...` (`--conda_env`) name of the conda environment to install to (has to
-  be activated manually!)
-- `-c <ssh|https>` (`--clone`) clone repositories using `ssh` or `https`
+- `-e ...` (`--conda_env ...`) name of the conda environment to install to (has
+  to be activated manually!)
+- `-c <ssh|https>` (`--clone ...`) clone repositories using `ssh` or `https`
 - `-i`(`--install`) install all packages in development mode
 
 #### 3. [Optional] Test installation ####
@@ -60,17 +60,17 @@ python -c "import ubermag; ubermag.test()"
 ### Pull changes in all packages ###
 
 ```bash
-python manage-ubermag.py -d ubermag -e ubermagdev --pull
+python manage-ubermag.py -e ubermagdev --pull
 ```
 
 ### Set up pre-commit ###
 
 ```bash
-python manage-ubermag.py -d ubermag -e ubermagdev --pre-commit
+python manage-ubermag.py -e ubermagdev --pre-commit
 ```
 
 ### Uninstalling packages ###
 
 ```bash
-python manage-ubermag.py -d ubermag -e ubermagdev --uninstall
+python manage-ubermag.py -e ubermagdev --uninstall
 ```
