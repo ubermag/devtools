@@ -25,15 +25,15 @@ within one base directory, here called `ubermag`:
       |
       +-- setup-ubermag.py
 
+### Clone and install packages
+
 To get started create the base directory, copy `setup-ubermag.py` to that
 directory, and change into that directory. Your directory layout should then be:
 
     ubermag
       +-- setup-ubermag.py
 
-### Clone and install packages
-
-#### 1. Create and activate conda environment ####
+#### 1. Create and activate conda environment
 
 Create a new environment, here called `ubermagdev`, and install the most basic
 packages using `conda` (everything else will be installed via `pip`).
@@ -43,7 +43,7 @@ conda create -n ubermagdev -c conda-forge python=3.8 pip oommf
 conda activate ubermagdev
 ```
 
-#### 2. Clone and install all packages in development mode ####
+#### 2. Clone and install all packages in development mode
 
 ```bash
 python manage-ubermag.py -e ubermagdev -c ssh -i
@@ -54,25 +54,25 @@ python manage-ubermag.py -e ubermagdev -c ssh -i
 - `-c <ssh|https>` (`--clone ...`) clone repositories using `ssh` or `https`
 - `-i`(`--install`) install all packages in development mode
 
-#### 3. [Optional] Test installation ####
+#### 3. [Optional] Test installation
 
 ```bash
 python -c "import ubermag; ubermag.test()"
 ```
 
-### Pull changes in all packages ###
+### Pull changes in all packages
 
 ```bash
 python manage-ubermag.py --pull
 ```
 
-### Set up pre-commit ###
+### Set up pre-commit
 
 ```bash
 python manage-ubermag.py --init_pre_commit
 ```
 
-### Uninstalling packages ###
+### Uninstalling packages
 
 ```bash
 python manage-ubermag.py -e ubermagdev --uninstall
