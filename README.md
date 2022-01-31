@@ -16,11 +16,11 @@ within one base directory, here called `ubermag`:
 
     ubermag
       +-- discretisedfield
-      |     +-- .github
+      |     +-- .git
       |     +-- ...
       |
       +-- micromagneticdata
-      |     +-- .github
+      |     +-- .git
       |     +-- ...
       |
       +-- setup-ubermag.py
