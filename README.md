@@ -74,3 +74,9 @@ python manage-ubermag.py -e ubermagdev --pre-commit
 ```bash
 python manage-ubermag.py -e ubermagdev --uninstall
 ```
+
+## Update common metadata
+
+`repo-metadata` contains templates and additional helper scripts to update
+metadata common to all repositories. To update metadata in the repositories run
+the corresponding GitHub Action.
