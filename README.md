@@ -66,7 +66,7 @@ python manage-ubermag.py --pull
 ### Set up pre-commit ###
 
 ```bash
-python manage-ubermag.py --pre-commit
+python manage-ubermag.py --init_pre_commit
 ```
 
 ### Uninstalling packages ###
