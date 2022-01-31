@@ -11,8 +11,8 @@ To clone/install/update all ubermag subpackages we have a convenience script
 python manage-ubermag.py -h
 ```
 
-We assume a directory structure where all subpackages are contained within one
-base directory, here called `ubermag`:
+We assume/create a directory structure where all subpackages are contained
+within one base directory, here called `ubermag`:
 
     ubermag
       +-- discretisedfield
@@ -25,8 +25,11 @@ base directory, here called `ubermag`:
       |
       +-- setup-ubermag.py
 
-To get started create the base-directory copy `setup-ubermag.py` to that
-directory, and change into that directory.
+To get started create the base directory, copy `setup-ubermag.py` to that
+directory, and change into that directory. Your directory layout should then be:
+
+    ubermag
+      +-- setup-ubermag.py
 
 ### Clone and install packages
 
