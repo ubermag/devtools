@@ -38,11 +38,7 @@ def _change_directory(path):
         os.chdir(prev_path)
 
 
-def main(args):
-    # sanity checks
-    assert shutil.which('conda'), 'Conda is missing'
-    assert shutil.which('git'), 'git is missing'
-
+def _check_conda_env(args):
     # simple check if the correct conda environment is activated
     envs = sp.run(['conda', 'env', 'list'], stdout=sp.PIPE)
     assert re.findall(
@@ -50,6 +46,11 @@ def main(args):
         envs.stdout.decode('utf-8', 'replace'),
         flags=re.MULTILINE
     ), f'missmatch between activated environment and passed {args.conda_env=}'
+
+def main(args):
+    # sanity checks
+    assert shutil.which('conda'), 'Conda is missing'
+    assert shutil.which('git'), 'git is missing'
 
     no_action = True
 
@@ -64,16 +65,18 @@ def main(args):
             sp.run(['git', 'clone', f'{base_url}{repo}.git'])
         no_action = False
 
+    if args.pull:
+        _execute_command(['git', 'pull'])
+        no_action = False
+
     if args.install:
+        _check_conda_env(args)
         _execute_command(['pip', 'install', '-e', '.[dev,test]'])
         no_action = False
 
     if args.uninstall:
+        _check_conda_env(args)
         _execute_command(['pip', 'uninstall', '.'])
-        no_action = False
-
-    if args.pull:
-        _execute_command(['git', 'pull'])
         no_action = False
 
     if args.init_pre_commit:

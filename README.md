@@ -47,7 +47,7 @@ python manage-ubermag.py -e ubermagdev -c ssh -i
 ```
 
 - `-e ...` (`--conda_env ...`) name of the conda environment to install to (has
-  to be activated manually!)
+  to be activated manually!), only used for basic sanity checks
 - `-c <ssh|https>` (`--clone ...`) clone repositories using `ssh` or `https`
 - `-i`(`--install`) install all packages in development mode
 
@@ -60,13 +60,13 @@ python -c "import ubermag; ubermag.test()"
 ### Pull changes in all packages ###
 
 ```bash
-python manage-ubermag.py -e ubermagdev --pull
+python manage-ubermag.py --pull
 ```
 
 ### Set up pre-commit ###
 
 ```bash
-python manage-ubermag.py -e ubermagdev --pre-commit
+python manage-ubermag.py --pre-commit
 ```
 
 ### Uninstalling packages ###
