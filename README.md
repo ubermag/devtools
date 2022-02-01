@@ -16,7 +16,7 @@ within one base directory, here called `ubermag-devtools/repos`:
 
     ubermag-devtools
       +-- .git
-      +-- .gitignore
+      +-- ...
       +-- repo-metadata
       |     +-- ...
       +-- repos
@@ -24,8 +24,9 @@ within one base directory, here called `ubermag-devtools/repos`:
       |     |     +-- .git
       |     |     +-- ...
       |     +-- micromagneticdata
-      |           +-- .git
-      |           +-- ...
+      |     |     +-- .git
+      |     |     +-- ...
+      |     +-- ...
       +-- manage-repos.py
 
 ### Clone and install packages
