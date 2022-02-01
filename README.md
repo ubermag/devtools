@@ -49,7 +49,7 @@ should then be similar to (not all content of the `devtools` repository is shown
 here):
 
     ubermag-devtools
-      +-- .gitignore
+      +-- .git
       +-- repo-metadata
       |     +-- ...
       +-- manage-repos.py
