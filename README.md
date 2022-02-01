@@ -12,36 +12,61 @@ python manage-ubermag.py -h
 ```
 
 We assume/create a directory structure where all subpackages are contained
-within one base directory, here called `ubermag`:
+within one base directory, here called `ubermag-devtools/repos`:
 
-    ubermag
-      +-- discretisedfield
-      |     +-- .git
+    ubermag-devtools
+      +-- .gitignore
+      +-- repo-metadata
       |     +-- ...
-      |
-      +-- micromagneticdata
-      |     +-- .git
-      |     +-- ...
-      |
+      +-- repos
+      |     +-- discretisedfield
+      |     |     +-- .git
+      |     |     +-- ...
+      |     |
+      |     +-- micromagneticdata
+      |           +-- .git
+      |           +-- ...
       +-- setup-ubermag.py
 
 ### Clone and install packages
 
-To get started create the base directory, copy `setup-ubermag.py` to that
-directory, and change into that directory. Your directory layout should then be:
+To get started clone the `devtools` repository via ssh:
 
-    ubermag
+```bash
+git clone git@github.com:ubermag/devtools.git ubermag-devtools
+```
+
+or https if you don't have an `ssh key`:
+
+```bash
+git clone https://github.com/ubermag/devtools.git ubermag-devtools
+```
+
+and change into that directory (we clone the `devtools` repository to a custom
+location `ubermag-devtools` which is more expressive). Your directory layout
+should then be similar to (not all content of the `devtools` repository is shown
+here):
+
+    ubermag-devtools
+      +-- .gitignore
+      +-- repo-metadata
+      |     +-- ...
       +-- setup-ubermag.py
 
-#### 1. Create and activate conda environment
+#### 1. Create and activate `conda` environment
 
-Create a new environment, here called `ubermagdev`, and install the most basic
-packages using `conda` (everything else will be installed via `pip`).
+Create a new `conda` environment, here called `ubermagdev`, and install the most basic
+packages from `conda-forge` using `conda` (everything else will be installed via `pip`).
 
 ```bash
 conda create -n ubermagdev -c conda-forge python=3.8 pip oommf
 conda activate ubermagdev
 ```
+
+We use `conda` for this step because simplifies the installation of `OOMMF`. (If
+you don't have `conda` we suggest you install
+[`miniconda`](https://docs.conda.io/en/latest/miniconda.html).) We use Python
+version 3.8 as this is the oldest version that `ubermag` currently supports.
 
 #### 2. Clone and install all packages in development mode
 
@@ -53,6 +78,10 @@ python manage-ubermag.py -e ubermagdev -c ssh -i
   to be activated manually!), only used for basic sanity checks
 - `-c <ssh|https>` (`--clone ...`) clone repositories using `ssh` or `https`
 - `-i`(`--install`) install all packages in development mode
+
+This will create a new directory `repos` and clone all repositories into
+that directory using the specified protocol. Then all packages are installed in
+development mode.
 
 #### 3. [Optional] Test installation
 

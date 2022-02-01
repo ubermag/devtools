@@ -1,12 +1,13 @@
-"""Script to set up ubermag development."""
+"""Script to set up ubermag for development."""
 import argparse
 import contextlib
 import os
-import pathlib
 import re
 import shutil
 import subprocess as sp
 
+
+REPODIR = 'repos'
 
 # order is important
 REPOLIST = [
@@ -24,13 +25,13 @@ REPOLIST = [
 
 def _execute_command(cmd):
     for repo in REPOLIST:
-        with _change_directory(repo):
+        with _change_directory(f'{REPODIR}/{repo}'):
             sp.run(cmd)
 
 
 @contextlib.contextmanager
 def _change_directory(path):
-    prev_path = pathlib.Path.cwd()
+    prev_path = os.getcwd()
     os.chdir(path)
     try:
         yield
@@ -45,9 +46,11 @@ def _check_conda_env(args):
         rf'^{args.conda_env}\s+\*\s+',
         envs.stdout.decode('utf-8', 'replace'),
         flags=re.MULTILINE
-    ), f'missmatch between activated environment and passed {args.conda_env=}'
+    ), f'mismatch between activated environment and passed {args.conda_env=}'
+
 
 def main(args):
+    """Convenience-functionality to manage packages."""
     # sanity checks
     assert shutil.which('conda'), 'Conda is missing'
     assert shutil.which('git'), 'git is missing'
@@ -55,6 +58,7 @@ def main(args):
     no_action = True
 
     if args.clone:
+        os.mkdir(REPODIR)
         if args.clone == 'ssh':
             base_url = 'git@github.com:ubermag/'
         elif args.clone == 'https':
