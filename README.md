@@ -31,13 +31,13 @@ within one base directory, here called `ubermag-devtools/repos`:
 
 ### Clone and install packages
 
-To get started clone the `devtools` repository via ssh:
+To get started clone the `devtools` repository via `ssh`:
 
 ```bash
 git clone git@github.com:ubermag/devtools.git ubermag-devtools
 ```
 
-or https if you don't have an `ssh key`:
+or `https` if you don't have an `ssh key`:
 
 ```bash
 git clone https://github.com/ubermag/devtools.git ubermag-devtools
