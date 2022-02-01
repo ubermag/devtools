@@ -52,7 +52,7 @@ def clone(protocol, repo_list):
     elif protocol == 'https':
         base_url = 'https://github.com/ubermag/'
     else:
-        raise ValueError(f'Unknown protocol {args.clone}.')
+        raise ValueError(f'Unknown protocol {protocol}.')
     with _change_directory(REPODIR):
         for repo in repo_list:
             sp.run(['git', 'clone', f'{base_url}{repo}.git'])
@@ -71,7 +71,7 @@ def main(args):
         no_action = False
 
     if args.clone_extras:
-        clone(args.clone, EXTRA_REPOS)
+        clone(args.clone_extras, EXTRA_REPOS)
         no_action = False
 
     if args.pull:
