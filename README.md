@@ -5,10 +5,10 @@ Collection of scripts and additional information to help developers.
 ## Manage development installation
 
 To clone/install/update all ubermag subpackages we have a convenience script
-`manage-ubermag-repos.py`. To get a list of all possible options run:
+`manage-repos.py`. To get a list of all possible options run:
 
 ```bash
-python manage-ubermag-repos.py -h
+python manage-repos.py -h
 ```
 
 We assume/create a directory structure where all subpackages are contained
@@ -26,7 +26,7 @@ within one base directory, here called `ubermag-devtools/repos`:
       |     +-- micromagneticdata
       |           +-- .git
       |           +-- ...
-      +-- manage-ubermag-repos.py
+      +-- manage-repos.py
 
 ### Clone and install packages
 
@@ -51,7 +51,7 @@ here):
       +-- .gitignore
       +-- repo-metadata
       |     +-- ...
-      +-- manage-ubermag-repos.py
+      +-- manage-repos.py
 
 #### 1. Create and activate `conda` environment
 
@@ -71,7 +71,7 @@ version 3.8 as this is the oldest version that `ubermag` currently supports.
 #### 2. Clone and install all packages in development mode
 
 ```bash
-python manage-ubermag-repos.py -e ubermagdev -c ssh -i
+python manage-repos.py -e ubermagdev -c ssh -i
 ```
 
 - `-e ...` (`--conda_env ...`) name of the conda environment to install to (has
@@ -92,19 +92,19 @@ python -c "import ubermag; ubermag.test()"
 ### Pull changes in all packages
 
 ```bash
-python manage-ubermag-repos.py --pull
+python manage-repos.py --pull
 ```
 
 ### Set up pre-commit
 
 ```bash
-python manage-ubermag-repos.py --init_pre_commit
+python manage-repos.py --init_pre_commit
 ```
 
 ### Uninstalling packages
 
 ```bash
-python manage-ubermag-repos.py -e ubermagdev --uninstall
+python manage-repos.py -e ubermagdev --uninstall
 ```
 
 ## Update common metadata
