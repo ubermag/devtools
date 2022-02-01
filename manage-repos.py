@@ -28,6 +28,7 @@ EXTRA_REPOS = [
     'workshop',
 ]
 
+
 def _execute_command(cmd):
     for repo in REPOLIST:
         with _change_directory(f'{REPODIR}/{repo}'):
