@@ -72,11 +72,9 @@ version 3.8 as this is the oldest version that `ubermag` currently supports.
 #### 2. Clone and install all packages in development mode
 
 ```bash
-python manage-repos.py -e ubermagdev -c ssh -i
+python manage-repos.py -c ssh -i
 ```
 
-- `-e ...` (`--conda_env ...`) name of the conda environment to install to (has
-  to be activated manually!), only used for basic sanity checks
 - `-c <ssh|https>` (`--clone ...`) clone repositories using `ssh` or `https`
 - `-i` (`--install`) install all packages in development mode
 
@@ -94,7 +92,7 @@ python -c "import ubermag; ubermag.test()"
 ### Pull changes in all packages
 
 ```bash
-python manage-repos.py --pull
+python manage-repos.py -p
 ```
 
 ### [SKIP - Not yet fully set up] Set up pre-commit
@@ -106,7 +104,7 @@ python manage-repos.py --init_pre_commit
 ### Uninstalling packages
 
 ```bash
-python manage-repos.py -e ubermagdev --uninstall
+python manage-repos.py -u
 ```
 
 ## Update common metadata

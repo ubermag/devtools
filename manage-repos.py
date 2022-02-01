@@ -2,7 +2,6 @@
 import argparse
 import contextlib
 import os
-import re
 import shutil
 import subprocess as sp
 
@@ -39,16 +38,6 @@ def _change_directory(path):
         os.chdir(prev_path)
 
 
-def _check_conda_env(args):
-    # simple check if the correct conda environment is activated
-    envs = sp.run(['conda', 'env', 'list'], stdout=sp.PIPE)
-    assert re.findall(
-        rf'^{args.conda_env}\s+\*\s+',
-        envs.stdout.decode('utf-8', 'replace'),
-        flags=re.MULTILINE
-    ), f'mismatch between activated environment and passed {args.conda_env=}'
-
-
 def main(args):
     """Convenience-functionality to manage packages."""
     # sanity checks
@@ -76,12 +65,10 @@ def main(args):
         no_action = False
 
     if args.install:
-        _check_conda_env(args)
         _execute_command(['pip', 'install', '-e', '.[dev,test]'])
         no_action = False
 
     if args.uninstall:
-        _check_conda_env(args)
         _execute_command(['pip', 'uninstall', '.'])
         no_action = False
 
@@ -96,15 +83,6 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        '--conda_env', '-e',
-        type=str,
-        required=True,
-        help=('Name of the conda environment that is meant to be used.'
-              ' The environment must exist and be activated. It is only used'
-              ' for very basic checks to avoiding installing packages to the'
-              ' base environment.')
-    )
     parser.add_argument(
         '--clone', '-c',
         type=str,
