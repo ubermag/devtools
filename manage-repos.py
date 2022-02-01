@@ -65,8 +65,10 @@ def main(args):
             base_url = 'https://github.com/ubermag/'
         else:
             raise ValueError(f'Unknown protocol {args.clone}.')
-        for repo in REPOLIST:
-            sp.run(['git', 'clone', f'{base_url}{repo}.git'])
+        with _change_directory(REPODIR):
+            for repo in REPOLIST:
+                sp.run(['git', 'clone', f'{base_url}{repo}.git'])
+            sp.run(['git', 'clone', f'{base_url}workshop.git'])
         no_action = False
 
     if args.pull:
