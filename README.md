@@ -22,7 +22,6 @@ within one base directory, here called `ubermag-devtools/repos`:
       |     +-- discretisedfield
       |     |     +-- .git
       |     |     +-- ...
-      |     |
       |     +-- micromagneticdata
       |           +-- .git
       |           +-- ...
