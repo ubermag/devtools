@@ -60,7 +60,7 @@ Create a new `conda` environment, here called `ubermagdev`, and install the most
 packages from `conda-forge` using `conda` (everything else will be installed via `pip`).
 
 ```bash
-conda create -n ubermagdev -c conda-forge python=3.8 pip oommf
+conda create -n ubermagdev -c conda-forge -y python=3.8 pip oommf
 conda activate ubermagdev
 ```
 
