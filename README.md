@@ -64,8 +64,8 @@ conda create -n ubermagdev -c conda-forge python=3.8 pip oommf
 conda activate ubermagdev
 ```
 
-We use `conda` for this step because simplifies the installation of `OOMMF`. (If
-you don't have `conda` we suggest you install
+We use `conda` for this step because it simplifies the installation of `OOMMF`.
+(If you don't have `conda` we suggest you install
 [`miniconda`](https://docs.conda.io/en/latest/miniconda.html).) We use Python
 version 3.8 as this is the oldest version that `ubermag` currently supports.
 
@@ -78,11 +78,12 @@ python manage-repos.py -e ubermagdev -c ssh -i
 - `-e ...` (`--conda_env ...`) name of the conda environment to install to (has
   to be activated manually!), only used for basic sanity checks
 - `-c <ssh|https>` (`--clone ...`) clone repositories using `ssh` or `https`
-- `-i`(`--install`) install all packages in development mode
+- `-i` (`--install`) install all packages in development mode
 
-This will create a new directory `repos` and clone all repositories into
-that directory using the specified protocol. Then all packages are installed in
-development mode.
+This will create a new directory `repos` and clone all repositories into that
+directory using the specified protocol. Then all packages are installed in
+development mode. Your directory tree should now look like outline in the
+beginning.
 
 #### 3. [Optional] Test installation
 
@@ -96,7 +97,7 @@ python -c "import ubermag; ubermag.test()"
 python manage-repos.py --pull
 ```
 
-### Set up pre-commit
+### [SKIP - Not yet fully set up] Set up pre-commit
 
 ```bash
 python manage-repos.py --init_pre_commit
