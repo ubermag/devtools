@@ -21,6 +21,12 @@ REPOLIST = [
     'ubermag',
 ]
 
+EXTRA_REPOS = [
+    'help',
+    'mumax3c',
+    'ubermag.github.io',
+    'workshop',
+]
 
 def _execute_command(cmd):
     for repo in REPOLIST:
@@ -38,6 +44,20 @@ def _change_directory(path):
         os.chdir(prev_path)
 
 
+def clone(protocol, repo_list):
+    """Clone all repositories."""
+    os.makedirs(REPODIR, exist_ok=True)
+    if protocol == 'ssh':
+        base_url = 'git@github.com:ubermag/'
+    elif protocol == 'https':
+        base_url = 'https://github.com/ubermag/'
+    else:
+        raise ValueError(f'Unknown protocol {args.clone}.')
+    with _change_directory(REPODIR):
+        for repo in repo_list:
+            sp.run(['git', 'clone', f'{base_url}{repo}.git'])
+
+
 def main(args):
     """Convenience-functionality to manage packages."""
     # sanity checks
@@ -47,17 +67,11 @@ def main(args):
     no_action = True
 
     if args.clone:
-        os.mkdir(REPODIR)
-        if args.clone == 'ssh':
-            base_url = 'git@github.com:ubermag/'
-        elif args.clone == 'https':
-            base_url = 'https://github.com/ubermag/'
-        else:
-            raise ValueError(f'Unknown protocol {args.clone}.')
-        with _change_directory(REPODIR):
-            for repo in REPOLIST:
-                sp.run(['git', 'clone', f'{base_url}{repo}.git'])
-            sp.run(['git', 'clone', f'{base_url}workshop.git'])
+        clone(args.clone, REPOLIST)
+        no_action = False
+
+    if args.clone_extras:
+        clone(args.clone, EXTRA_REPOS)
         no_action = False
 
     if args.pull:
@@ -90,6 +104,16 @@ if __name__ == '__main__':
         required=False,
         help=('If specified all subpackages will be cloned using the specified'
               ' protocol. Can be `ssh` or `https`.')
+    )
+    parser.add_argument(
+        '--clone_extras',
+        type=str,
+        default='',
+        required=False,
+        help=('If specified the additional repositories will be cloned using'
+              ' the specified protocol. Can be `ssh` or `https`. Currently,'
+              ' these are the `website-repository`, the `workshop`, `help`,'
+              ' and `mumax3c`')
     )
     parser.add_argument(
         '--init_pre_commit',

@@ -83,7 +83,20 @@ directory using the specified protocol. Then all packages are installed in
 development mode. Your directory tree should now look like outline in the
 beginning.
 
-#### 3. [Optional] Test installation
+#### 3. [Optional] Clone the additional repos
+
+```bash
+python manage-repos.py --clone_extras ssh
+```
+
+Clones the following additional repositories:
+
+- `help`
+- `mumax3c`
+- `ubermag.github.io` (the website repository)
+- `workshop`
+
+#### 4. [Optional] Test installation
 
 ```bash
 python -c "import ubermag; ubermag.test()"
