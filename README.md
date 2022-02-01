@@ -15,6 +15,7 @@ We assume/create a directory structure where all subpackages are contained
 within one base directory, here called `ubermag-devtools/repos`:
 
     ubermag-devtools
+      +-- .git
       +-- .gitignore
       +-- repo-metadata
       |     +-- ...
