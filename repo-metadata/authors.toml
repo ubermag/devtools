@@ -18,6 +18,7 @@
 "Thomas Hicken" = {github = "@", affiliations = ["durham"]}
 "Thomas Kluyver" = {github = "@takluyver", affiliations = ["xfel"]}
 "Vanessa Nehruji" = {github = "@vanessanehruji", affiliations = ["southampton"]}
+"Swapneel Amit Pathak" = {github ="@swapneelap", affiliations = ["max-planck"]}
 
 [affiliations]
 birmingham = "Research Software Group, University of Birmingham, Birmingham B15 2TT, UK"
