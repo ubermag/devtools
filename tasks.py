@@ -68,7 +68,8 @@ def install(c):
 @task
 def uninstall(c):
     """Uninstall all ubermag subpackages."""
-    _execute_command(c, 'pip uninstall .')
+    for pkg in reversed(REPOLIST):
+        c.run(f'pip uninstall {pkg} -y')
 
 
 @task
