@@ -93,7 +93,7 @@ beginning.
 #### 3. [Optional] Clone the additional repos
 
 ```bash
-invoke clone-extras
+invoke clone-extras -p ssh
 ```
 
 Clones the following additional repositories:
