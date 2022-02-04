@@ -4,11 +4,18 @@ Collection of scripts and additional information to help developers.
 
 ## Manage development installation
 
-To clone/install/update all ubermag subpackages we have a convenience script
-`manage-repos.py`. To get a list of all possible options run:
+To clone/install/update all ubermag subpackages we use `invoke` (can be
+installed via `pip` or `conda`, see below). Tasks are defined in `tasks.py`. To
+get a list of all possible options run:
 
 ```bash
-python manage-repos.py -h
+invoke --list
+```
+
+To get more detailed help on one specific `command`, run:
+
+```bash
+invoke --help <command>
 ```
 
 We assume/create a directory structure where all subpackages are contained
@@ -56,11 +63,12 @@ here):
 
 #### 1. Create and activate `conda` environment
 
-Create a new `conda` environment, here called `ubermagdev`, and install the most basic
-packages from `conda-forge` using `conda` (everything else will be installed via `pip`).
+Create a new `conda` environment, here called `ubermagdev`, and install the most
+basic packages (`python`, `pip`, `oommf`, and `invoke`) from `conda-forge` using
+`conda` (everything else will be installed via `pip`).
 
 ```bash
-conda create -n ubermagdev -c conda-forge -y python=3.8 pip oommf
+conda create -n ubermagdev -c conda-forge -y python=3.8 pip oommf invoke
 conda activate ubermagdev
 ```
 
@@ -72,11 +80,10 @@ version 3.8 as this is the oldest version that `ubermag` currently supports.
 #### 2. Clone and install all packages in development mode
 
 ```bash
-python manage-repos.py -c ssh -i
+invoke clone -p ssh install
 ```
 
-- `-c <ssh|https>` (`--clone ...`) clone repositories using `ssh` or `https`
-- `-i` (`--install`) install all packages in development mode
+- `-p <ssh|https>` (`--protocol ...`) clone repositories using `ssh` or `https`
 
 This will create a new directory `repos` and clone all repositories into that
 directory using the specified protocol. Then all packages are installed in
@@ -86,7 +93,7 @@ beginning.
 #### 3. [Optional] Clone the additional repos
 
 ```bash
-python manage-repos.py --clone_extras ssh
+invoke clone-extras -p ssh
 ```
 
 Clones the following additional repositories:
@@ -105,19 +112,19 @@ python -c "import ubermag; ubermag.test()"
 ### Pull changes in all packages
 
 ```bash
-python manage-repos.py -p
+invoke pull
 ```
 
 ### [SKIP - Not yet fully set up] Set up pre-commit
 
 ```bash
-python manage-repos.py --init_pre_commit
+invoke init-pre-commit
 ```
 
 ### Uninstalling packages
 
 ```bash
-python manage-repos.py -u
+invoke uninstall
 ```
 
 ## Update common metadata
