@@ -2,7 +2,7 @@
 
 Collection of scripts and additional information to help developers.
 
-## Manage development installation [NEW INVOKE COMMANDS]
+## Manage development installation
 
 To clone/install/update all ubermag subpackages we use `invoke` (can be
 installed via `pip` or `conda`, see below). Tasks are defined in `tasks.py`. To
