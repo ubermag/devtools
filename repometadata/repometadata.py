@@ -18,20 +18,6 @@ all_repos = [
     'ubermagutil',
 ]
 
-all_files = [
-    '.github/workflows/conda.yml',
-    '.github/workflows/workflow.yml',
-    '.gitignore',
-    '.pre-commit-config.yaml',
-    'LICENSE',
-    'Makefile',
-    'README.md',
-    'nbval.cfg',
-    'pyproject.toml',
-    'setup.cfg',
-    'setup.py',
-]
-
 
 def authors_to_dict(authors_in):
     """Match authors and affiliations."""
@@ -63,12 +49,48 @@ def authors_to_dict(authors_in):
                              for a, index in affiliation_numbers.items()]}
 
 
-def generate_files(*, repository, files):
-    """Generate files from jinja2 templates."""
-    req = requests.get(
-        f'https://raw.github.com/ubermag/{repository}/master/pyproject.toml',
-        headers={'Cache-Control': 'no-cache'})
-    pyproject = tomli.loads(req.text)
+def generate_files(*, repository, files=None, pyproject_path=''):
+    """Generate files from jinja2 templates.
+
+    Parameters
+    ----------
+    repository : str
+
+        Name of the repository to update.
+
+    files : List(str), optional
+
+        Names of the files to be updated. If not specified all files will be
+        updated.
+
+    repopath : str, optional
+
+        Local path to the repository. Output will be written to the local
+        repository. If not specified download pyproject.toml from GitHub.
+    """
+    if files is None:
+        files = [
+            '.github/workflows/conda.yml',
+            '.github/workflows/workflow.yml',
+            '.gitignore',
+            '.pre-commit-config.yaml',
+            'LICENSE',
+            'Makefile',
+            'README.md',
+            'nbval.cfg',
+            'pyproject.toml',
+            'setup.cfg',
+            'setup.py',
+        ]
+
+    if pyproject_path:
+        with open(pyproject_path, 'rb') as f:
+            pyproject = tomli.load(f)
+    else:
+        req = requests.get(
+            f'https://raw.github.com/ubermag/{repository}/master/pyproject.toml',
+            headers={'Cache-Control': 'no-cache'})
+        pyproject = tomli.loads(req.text)
 
     authors = [author['name'] for author in pyproject['project']['authors']]
     data = {
@@ -94,9 +116,9 @@ def generate_files(*, repository, files):
             {'name': key, 'entrypoint': val}
             for key, val in pyproject['project']['scripts'].items()]
 
+    os.makedirs(f'{repository}/.github/workflows', exist_ok=True)
     env = jinja2.Environment(keep_trailing_newline=True,
                              loader=jinja2.FileSystemLoader('./templates/'))
-    os.makedirs(f'./{repository}/.github/workflows', exist_ok=True)
 
     for t_name in env.list_templates():
         name = t_name[: -len('.jinja') - 1]
@@ -116,12 +138,11 @@ if __name__ == '__main__':
     parser.add_argument('--file', '-f',
                         type=str,
                         nargs='+',
-                        required=True,
+                        required=False,
                         help='Metadata file.')
     args = parser.parse_args()
 
     repos = all_repos if 'all' in args.repo else args.repo
-    files = all_files if 'all' in args.file else args.file
 
     for repo in repos:
-        generate_files(repository=repo, files=files)
+        generate_files(repository=repo, files=args.file)
