@@ -74,6 +74,7 @@ def generate_files(*, repository, files=None, pyproject_path=''):
             '.github/workflows/workflow.yml',
             '.gitignore',
             '.pre-commit-config.yaml',
+            'binder/environment.yml',
             'LICENSE',
             'Makefile',
             'README.md',
