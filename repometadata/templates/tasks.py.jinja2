@@ -1,0 +1,63 @@
+"""Tasks to release the package."""
+import os
+import shutil
+
+import iniconfig
+import tomli
+from invoke import task
+
+PYTHON = 'python'
+
+
+@task
+def build_dists(c):
+    """Build sdist and wheel."""
+    if os.path.exists('dist'):
+        shutil.rmtree('dist')
+    c.run(f'{PYTHON} -m build')
+
+
+@task(build_dists)
+def upload(c):
+    """Upload package to PyPI."""
+    c.run('twine upload dist/*')
+
+
+@task
+def release(c):
+    """Run the whole release process.
+
+    Steps:
+    - Pull all changes in ``master`` and ``stable`` branch.
+    - Merge ``master`` into ``stable``.
+    - Tag last commit using version information from setup.cfg/pyproject.toml.
+    - Build package (``sdist`` and ``wheel``).
+    - Upload package to PyPI.
+    - Push changes and new tags.
+    """
+    c.run('git checkout master')
+    c.run('git pull')
+
+    # the next three lines would not be required with a `latest` tag
+    c.run('git checkout stable')
+    c.run('git pull')
+    c.run('git merge master')
+
+    version = iniconfig.IniConfig('setup.cfg').get('metadata', 'version')
+    # sanity checks while we have two places containing the version.
+    with open('pyproject.toml', 'rb') as f:
+        toml_version = tomli.load(f)['project']['version']
+    assert toml_version == version, ('Different versions in pyproject.toml and'
+                                     ' setup.cfg. Aborting.')
+
+    c.run(f'git tag {version}')  # fails if the tag exists
+    # c.run(f'git tag -f latest')  # `latest` tag for binder
+
+    build_dists(c)
+    upload(c)
+
+    c.run('git push --tags')
+
+    # the next two lines would not be required with a `latest` tag
+    c.run('git push')
+    c.run('git checkout master')
