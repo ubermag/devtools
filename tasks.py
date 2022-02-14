@@ -97,7 +97,7 @@ def update_repo_metadata(c, repos, files, push=False, pr=True):
     """
     from repometadata.repometadata import generate_files
     if len(files) == 0:
-        files = None  # automatically pick all files
+        files = ['all']
     if len(repos) == 0:
         repos = REPOLIST
 

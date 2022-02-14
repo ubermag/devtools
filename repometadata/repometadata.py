@@ -68,7 +68,7 @@ def generate_files(*, repository, files=None, pyproject_path=''):
         Local path to the repository. Output will be written to the local
         repository. If not specified download pyproject.toml from GitHub.
     """
-    if files is None:
+    if 'all' in files:
         files = [
             '.github/workflows/conda.yml',
             '.github/workflows/workflow.yml',
@@ -138,7 +138,7 @@ if __name__ == '__main__':
     parser.add_argument('--file', '-f',
                         type=str,
                         nargs='+',
-                        required=False,
+                        required=True,
                         help='Metadata file.')
     args = parser.parse_args()
 
