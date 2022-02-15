@@ -87,7 +87,7 @@ def init_pre_commit(c):
                    ' exist --create-branch must be passed.'),
         'create-branch': ('Create the specified branch. Overwrites existing'
                           ' branches [git option -B is used].'),
-        'commit_message': 'Optionally pass a custom commit message.'
+        'commit_message': 'Optionally pass a custom commit message.',
         'push': 'Push changes; defaults to true.'},
     iterable=['files', 'repos']
 )
