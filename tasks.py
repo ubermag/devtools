@@ -87,10 +87,16 @@ def init_pre_commit(c):
                    ' exist --create-branch must be passed.'),
         'create-branch': ('Create the specified branch. Overwrites existing'
                           ' branches [git option -B is used].'),
+        'commit_message': 'Optionally pass a custom commit message.'
         'push': 'Push changes; defaults to true.'},
     iterable=['files', 'repos']
 )
-def update_repometadata(c, repos, files, branch, create_branch=False,
+def update_repometadata(c,
+                        repos,
+                        files,
+                        branch,
+                        create_branch=False,
+                        commit_message='Update repository metadata',
                         push=True):
     """Update repo-metadata locally.
 
@@ -119,7 +125,7 @@ def update_repometadata(c, repos, files, branch, create_branch=False,
             shutil.rmtree(f'{repo}')
             with _change_directory(f'../{REPODIR}/{repo}'):
                 c.run('git add .')
-                c.run('git commit -m "Update repo metadata."')
+                c.run(f'git commit -m "{commit_message}"')
                 if push:
                     push = f'-u origin {branch}' if branch is not None else ''
                     c.run(f'git push {push}')
