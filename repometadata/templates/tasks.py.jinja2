@@ -3,10 +3,12 @@ import os
 import shutil
 
 import iniconfig
+import pytest
 import tomli
-from invoke import task
+from invoke import Collection, task
 
 PYTHON = 'python'
+root_collection = Collection()
 
 
 @task
@@ -52,3 +54,59 @@ def release(c):
     upload(c)
 
     c.run('git push -F --tags')
+
+
+root_collection.add_task(build_dists)
+root_collection.add_task(upload)
+root_collection.add_task(release)
+
+test_collection = Collection('test')
+
+
+@task
+def unittest(c):
+    """Run unittests."""
+    import {{ package }}
+    {{ package }}.test()
+
+
+@task
+def coverage(c):
+    """Run unittests with coverage."""
+    pytest.main(['-v', '--cov', '{{ package }}', '--cov-report', 'xml'])
+
+
+@task
+def docs(c):
+    """Run doctests."""
+    pytest.main(['-v', '--doctest-modules', '--ignore', '{{ package }}/tests',
+                 'ubermagutil'])
+
+
+@task
+def ipynb(c):
+    """Test notebooks."""
+    pytest.main(['-v', '--nbval', '--sanitize-with', 'nbval.cfg',
+                 'docs'])
+
+
+@task
+def pycodestyle(c):
+    """Test pycodestyle.
+
+    Will be replaces with flake8.
+    """
+    c.run(f'{PYTHON} -m pycodestyle --filename=*.py .')
+
+
+@task(unittest, docs, ipynb, pycodestyle)
+def all(unittest):
+    """Run all tests."""
+
+
+test.add_task(unittest)
+test.add_task(docs)
+test.add_task(ipynb)
+test.add_task(pycodestyle)
+test.add_task(all)
+root_collection.add_collection(test_collection)
