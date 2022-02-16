@@ -28,20 +28,15 @@ def release(c):
     """Run the whole release process.
 
     Steps:
-    - Pull all changes in ``master`` and ``stable`` branch.
-    - Merge ``master`` into ``stable``.
+    - Pull all changes in ``master``.
     - Tag last commit using version information from setup.cfg/pyproject.toml.
+    - Update the ``latest`` tag to point to the last commit.
     - Build package (``sdist`` and ``wheel``).
     - Upload package to PyPI.
-    - Push changes and new tags.
+    - Push new tags.
     """
     c.run('git checkout master')
     c.run('git pull')
-
-    # the next three lines would not be required with a `latest` tag
-    c.run('git checkout stable')
-    c.run('git pull')
-    c.run('git merge master')
 
     version = iniconfig.IniConfig('setup.cfg').get('metadata', 'version')
     # sanity checks while we have two places containing the version.
@@ -51,13 +46,9 @@ def release(c):
                                      ' setup.cfg. Aborting.')
 
     c.run(f'git tag {version}')  # fails if the tag exists
-    # c.run(f'git tag -f latest')  # `latest` tag for binder
+    c.run('git tag -f latest')  # `latest` tag for binder
 
     build_dists(c)
     upload(c)
 
     c.run('git push --tags')
-
-    # the next two lines would not be required with a `latest` tag
-    c.run('git push')
-    c.run('git checkout master')
