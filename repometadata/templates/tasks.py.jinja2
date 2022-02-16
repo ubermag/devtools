@@ -51,4 +51,4 @@ def release(c):
     build_dists(c)
     upload(c)
 
-    c.run('git push --tags')
+    c.run('git push -F --tags')
