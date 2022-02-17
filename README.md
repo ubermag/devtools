@@ -165,17 +165,17 @@ Available options are:
 
 Examples:
 
-1. Update all files in `ubermagutil` and `discretisedfield` on the master branch but do not push changes:
+1. Update all files in all repositories on a new (-> `-c`) branch `metadata-update` and push the changes:
+   ```bash
+   $ invoke update-repometadata -b metadata-update -c
+   ```
+
+2. Update all files in `ubermagutil` and `discretisedfield` on the master branch but do not push changes:
    ```bash
    $ invoke update-repometadata -r ubermagutil -r discretisedfield -b master --no-push
    ```
    
-2. Update `README.md` in all repositories using a new (-> `-c`) branch `repo-metadata` with a special commit message and push the changes:
+3. Update `README.md` in all repositories using a new (-> `-c`) branch `repo-metadata` with a special commit message and push the changes:
    ```bash
-   $ invoke update-repometadata -f README.md -b repo-metadata -c --commit-message "Update README.md"
-   ```
-   
-3. Update all files in all repositories on a new (-> `-c`) branch `metadata-update` and push the changes:
-   ```bash
-   $ invoke update-repometadata -b metadata-update -c
+   $ invoke update-repometadata -f README.md -b repo-metadata -c --commit-message "Update README"
    ```
