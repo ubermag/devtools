@@ -81,19 +81,19 @@ def init_pre_commit(c):
 
 @task(
     help={
-        'repos': 'List of repos to update; all are updated if not specified',
-        'files': 'List of files to update; all are updated if not specified',
+        'repo': 'List of repos to update; all are updated if not specified',
+        'file': 'List of files to update; all are updated if not specified',
         'branch': ('Name of the branch to work on. If the branch does not'
                    ' exist --create-branch must be passed.'),
         'create-branch': ('Create the specified branch. Overwrites existing'
                           ' branches [git option -B is used].'),
         'commit_message': 'Optionally pass a custom commit message.',
         'push': 'Push changes; defaults to true.'},
-    iterable=['files', 'repos']
+    iterable=['file', 'repo']
 )
 def update_repometadata(c,
-                        repos,
-                        files,
+                        repo,
+                        file,
                         branch,
                         create_branch=False,
                         commit_message='Update repository metadata',
@@ -104,20 +104,20 @@ def update_repometadata(c,
     necessary. The task does NOT switch back to the previous branch.
     """
     from repometadata.repometadata import generate_files
-    if len(files) == 0:
-        files = ['all']
-    if len(repos) == 0:
-        repos = REPOLIST
+    if len(file) == 0:
+        file = ['all']
+    if len(repo) == 0:
+        repo = REPOLIST
 
     with _change_directory('repometadata'):
-        for repo in repos:
+        for repo in repo:
             if branch is not None:
                 with _change_directory(f'../{REPODIR}/{repo}'):
                     cmd = '-B' if create_branch else ''
                     c.run(f'git checkout {cmd} {branch}')
             generate_files(
                 repository=repo,
-                files=files,
+                files=file,
                 pyproject_path=f'../{REPODIR}/{repo}/pyproject.toml')
             shutil.copytree(src=f'{repo}',
                             dst=f'../{REPODIR}/{repo}',
