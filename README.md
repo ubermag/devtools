@@ -153,6 +153,9 @@ PRs are opened using the `ubermagbot` account.
 
 ### Locally
 
+**The local update will only work for the directory structure explained
+above. Follow the instructions in the first section of this README.**
+
 The repometadata can locally be updated using the `invoke` task
 `update-repometadata`. It can update one ore multiple repositories at the same
 time. Furthermore, it can work on different branches, both, existing and new
