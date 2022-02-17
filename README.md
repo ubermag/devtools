@@ -140,42 +140,60 @@ The local update provides more functionallity.
 
 The action can only update one repository at a time. It needs:
 - the name of the repository
-- [optionally] the name of the files to update; if no files are specified all files are updated
+- [optionally] the name of the files to update; if no files are specified all
+  files are updated
 
-The action can only update one repository at a time. Therefore, it is necessary to run the action for all repositories individually.
+The action can only update one repository at a time. Therefore, it is necessary
+to run the action for all repositories individually.
 
-**Note** The action creates a new branch `metadata-update` and opens a PR. It will fail *if the branch does already exist*
+**Note** The action creates a new branch `metadata-update` and opens a PR. It
+will fail if the branch does already exist.
 
 PRs are opened using the `ubermagbot` account.
 
 ### Locally
 
-The repometadata can locally be updated using the `invoke` task `update-repometadata`. It can update one ore multiple repositories at the same time. Furthermore, it can work on different branches, both, existing and new ones. To get a list of available options and additional help, run
+The repometadata can locally be updated using the `invoke` task
+`update-repometadata`. It can update one ore multiple repositories at the same
+time. Furthermore, it can work on different branches, both, existing and new
+ones. To get a list of available options and additional help, run
+
 ```bash
 $ invoke --help update-repometadata
 ```
 
 Available options are:
-- `r`/`--repo` name of the repository; can be passed multiple times to update multiple repositories simultaneously; if omitted all repositories are updated
-- `-f`/`--file` name of the file to update; can be passed multiple times ore omitted like `-r`
+- `r`/`--repo` name of the repository; can be passed multiple times to update
+  multiple repositories simultaneously; if omitted all repositories are updated
+- `-f`/`--file` name of the file to update; can be passed multiple times ore
+  omitted like `-r`
 - `-b`/`--branch` name of the branch to use; can be an existing or a new one
-- `-c`/`--create-branch` required if `-b` specifies a new branch that must be created (uses the `git` option `-B` so it will overwrite existing branches)
-- `-o`/`--commit-message` custom commit-message; if not specified the default is `Update repository metadata`
-- `--[no-]push` push or do not push the changes; default is true, i.e. `push` changes
+- `-c`/`--create-branch` required if `-b` specifies a new branch that must be
+  created (uses the `git` option `-B` so it will overwrite existing branches)
+- `-o`/`--commit-message` custom commit-message; if not specified the default is
+  `Update repository metadata`
+- `--[no-]push` push or do not push the changes; default is true, i.e. `push`
+  changes
 
 Examples:
 
-1. Update all files in all repositories on a new (-> `-c`) branch `metadata-update` and push the changes:
+1. Update all files in all repositories on a new (-> `-c`) branch
+   `metadata-update` and push the changes:
+
    ```bash
    $ invoke update-repometadata -b metadata-update -c
    ```
 
-2. Update all files in `ubermagutil` and `discretisedfield` on the master branch but do not push changes:
+2. Update all files in `ubermagutil` and `discretisedfield` on the master branch
+   but do not push changes:
+
    ```bash
    $ invoke update-repometadata -r ubermagutil -r discretisedfield -b master --no-push
    ```
    
-3. Update `README.md` in all repositories using a new (-> `-c`) branch `repo-metadata` with a special commit message and push the changes:
+3. Update `README.md` in all repositories using a new (-> `-c`) branch
+   `repo-metadata` with a special commit message and push the changes:
+
    ```bash
    $ invoke update-repometadata -f README.md -b repo-metadata -c --commit-message "Update README"
    ```
