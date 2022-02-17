@@ -34,7 +34,7 @@ within one base directory, here called `ubermag-devtools/repos`:
       |     |     +-- .git
       |     |     +-- ...
       |     +-- ...
-      +-- manage-repos.py
+      +-- tasks.py
 
 ### Clone and install packages
 
@@ -59,7 +59,7 @@ here):
       +-- .git
       +-- repometadata
       |     +-- ...
-      +-- manage-repos.py
+      +-- tasks.py
 
 #### 1. Create and activate `conda` environment
 
