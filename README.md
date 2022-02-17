@@ -161,7 +161,7 @@ Available options are:
 - `-b`/`--branch` name of the branch to use; can be an existing or a new one
 - `-c`/`--create-branch` required if `-b` specifies a new branch that must be created (uses the `git` option `-B` so it will overwrite existing branches)
 - `-o`/`--commit-message` custom commit-message; if not specified the default is `Update repository metadata`
-- `--[no-]push` push or not not push the changes; default is true, i.e. `push` changes
+- `--[no-]push` push or do not push the changes; default is true, i.e. `push` changes
 
 Examples:
 
