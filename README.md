@@ -136,7 +136,7 @@ metadata common to all repositories. The metadata can be updated:
 
 The local update provides more functionallity.
 
-### on GitHub
+### On GitHub
 
 The action can only update one repository at a time. It needs:
 - the name of the repository
@@ -148,7 +148,7 @@ The action can only update one repository at a time. Therefore, it is necessary 
 
 PRs are opened using the `ubermagbot` account.
 
-### locally
+### Locally
 
 The repometadata can locally be updated using the `invoke` task `update-repometadata`. It can update one ore multiple repositories at the same time. Furthermore, it can work on different branches, both, existing and new ones. To get a list of available options and additional help, run
 ```bash
