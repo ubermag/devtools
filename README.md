@@ -24,7 +24,7 @@ within one base directory, here called `ubermag-devtools/repos`:
     ubermag-devtools
       +-- .git
       +-- ...
-      +-- repo-metadata
+      +-- repometadata
       |     +-- ...
       +-- repos
       |     +-- discretisedfield
@@ -57,7 +57,7 @@ here):
 
     ubermag-devtools
       +-- .git
-      +-- repo-metadata
+      +-- repometadata
       |     +-- ...
       +-- manage-repos.py
 
@@ -129,6 +129,6 @@ invoke uninstall
 
 ## Update common metadata
 
-`repo-metadata` contains templates and additional helper scripts to update
+`repometadata` contains templates and additional helper scripts to update
 metadata common to all repositories. To update metadata in the repositories run
 the corresponding GitHub Action.
