@@ -157,24 +157,26 @@ PRs are opened using the `ubermagbot` account.
 above. Follow the instructions in the first section of this README.**
 
 The repometadata can locally be updated using the `invoke` task
-`update-repometadata`. It can update one ore multiple repositories at the same
-time. Furthermore, it can work on different branches, both, existing and new
-ones. To get a list of available options and additional help, run
+`update-repometadata`. The task can update one ore multiple repositories at the
+same time. Furthermore, it can work on different branches, both, existing and
+new ones. To get a list of available options and additional help, run
 
 ```bash
 $ invoke --help update-repometadata
 ```
 
 Available options are:
-- `r`/`--repo` name of the repository; can be passed multiple times to update
-  multiple repositories simultaneously; if omitted all repositories are updated
-- `-f`/`--file` name of the file to update; can be passed multiple times ore
-  omitted like `-r`
-- `-b`/`--branch` name of the branch to use; can be an existing or a new one
+- `r <REPO>`/`--repo <REPO>` name of the repository; can be passed multiple
+  times to update multiple repositories simultaneously; if omitted all
+  repositories are updated
+- `-f <FILE>`/`--file <FILE>` name of the file to update; can be passed multiple
+  times ore omitted like `-r`
+- `-b <BRANCH>`/`--branch <BRANCH>` name of the branch to use; can be an
+  existing or a new one
 - `-c`/`--create-branch` required if `-b` specifies a new branch that must be
   created (uses the `git` option `-B` so it will overwrite existing branches)
-- `-o`/`--commit-message` custom commit-message; if not specified the default is
-  `Update repository metadata`
+- `-o <MESSAGE>`/`--commit-message <MESSAGE>` custom commit-message; if not
+  specified the default is `Update repository metadata`
 - `--[no-]push` push or do not push the changes; default is true, i.e. `push`
   changes
 
