@@ -118,6 +118,7 @@ def generate_files(*, repository, files=None, pyproject_path=''):
             for key, val in pyproject['project']['scripts'].items()]
 
     os.makedirs(f'{repository}/.github/workflows', exist_ok=True)
+    os.makedirs(f'{repository}/binder', exist_ok=True)
     env = jinja2.Environment(keep_trailing_newline=True,
                              loader=jinja2.FileSystemLoader('./templates/'))
 
