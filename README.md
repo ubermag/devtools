@@ -138,7 +138,7 @@ The local update provides more functionallity.
 
 ### On GitHub
 
-The action can only update one repository at a time. It needs:
+The action needs:
 - the name of the repository
 - [optionally] the name of the files to update; if no files are specified all
   files are updated
