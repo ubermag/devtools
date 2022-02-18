@@ -100,6 +100,7 @@ Clones the following additional repositories:
 
 - `help`
 - `mumax3c`
+- `tutorials`
 - `ubermag.github.io` (the website repository)
 - `workshop`
 

@@ -24,6 +24,7 @@ REPOLIST = [
 EXTRA_REPOS = [
     'help',
     'mumax3c',
+    'tutorials',
     'ubermag.github.io',
     'workshop',
 ]
