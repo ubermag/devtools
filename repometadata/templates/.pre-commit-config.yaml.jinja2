@@ -5,9 +5,9 @@ repos:
   - id: check-merge-conflict  # checks for files that contain merge conflict strings
   - id: check-toml  # checks toml files for parseable syntax
   - id: debug-statements  # checks for debugger imports and py37+ `breakpoint()` calls in python source
-  - id: trailing-whitespace
-    args: [--markdown-linebreak-ext=md]
-    exclude: '{{ package }}/tests/test_sample/.*'
+#  - id: trailing-whitespace   # needs more checks
+#    args: [--markdown-linebreak-ext=md]
+#    exclude: '{{ package }}/tests/test_sample/.*'
 
 # - repo: https://github.com/pycqa/isort
 #   rev: 5.10.1
