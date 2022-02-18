@@ -82,6 +82,7 @@ def generate_files(*, repository, files=None, pyproject_path=''):
             'pyproject.toml',
             'setup.cfg',
             'setup.py',
+            'tasks.py',
         ]
 
     if pyproject_path:
