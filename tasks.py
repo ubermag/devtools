@@ -112,17 +112,19 @@ def update_repometadata(c,
 
     with _change_directory('repometadata'):
         for repo in repo:
-            if branch is not None:
-                with _change_directory(f'../{REPODIR}/{repo}'):
-                    cmd = '-B' if create_branch else ''
-                    c.run(f'git checkout {cmd} {branch}')
+            with _change_directory(f'../{REPODIR}/{repo}'):
+                cmd = '-B' if create_branch else ''
+                c.run(f'git checkout {cmd} {branch}')
+
             generate_files(
                 repository=repo,
                 files=file,
                 pyproject_path=f'../{REPODIR}/{repo}/pyproject.toml')
+
             shutil.copytree(src=f'{repo}',
                             dst=f'../{REPODIR}/{repo}',
                             dirs_exist_ok=True)
+
             shutil.rmtree(f'{repo}')
             with _change_directory(f'../{REPODIR}/{repo}'):
                 c.run('git add .')
