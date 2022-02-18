@@ -51,7 +51,7 @@ git clone https://github.com/ubermag/devtools.git ubermag-devtools
 ```
 
 and change into that directory (we clone the `devtools` repository to a custom
-location `ubermag-devtools` which is more expressive). Your directory layout
+location `ubermag-devtools` which is more explicit). Your directory layout
 should then be similar to (not all content of the `devtools` repository is shown
 here):
 
@@ -64,7 +64,7 @@ here):
 #### 1. Create and activate `conda` environment
 
 Create a new `conda` environment, here called `ubermagdev`, and install the most
-basic packages (`python`, `pip`, `oommf`, and `invoke`) from `conda-forge` using
+basic packages (`python`, `pip`, `oommf`, and `invoke`) from `conda-forge` channel using
 `conda` (everything else will be installed via `pip`).
 
 ```bash
@@ -74,8 +74,8 @@ conda activate ubermagdev
 
 We use `conda` for this step because it simplifies the installation of `OOMMF`.
 (If you don't have `conda` we suggest you install
-[`miniconda`](https://docs.conda.io/en/latest/miniconda.html).) We use Python
-version 3.8 as this is the oldest version that `ubermag` currently supports.
+[`miniconda3`](https://docs.conda.io/en/latest/miniconda.html).) We use Python
+version 3.8 as this is the oldest version `ubermag` currently supports.
 
 #### 2. Clone and install all packages in development mode
 
@@ -147,9 +147,7 @@ The action can only update one repository at a time. Therefore, it is necessary
 to run the action for all repositories individually.
 
 **Note** The action creates a new branch `metadata-update` and opens a PR. It
-will fail if the branch does already exist.
-
-PRs are opened using the `ubermagbot` account.
+will fail if the branch already exists. PRs are opened using the `ubermagbot` account.
 
 ### Locally
 
@@ -157,8 +155,8 @@ PRs are opened using the `ubermagbot` account.
 above. Follow the instructions in the first section of this README.**
 
 The repometadata can locally be updated using the `invoke` task
-`update-repometadata`. The task can update one ore multiple repositories at the
-same time. Furthermore, it can work on different branches, both, existing and
+`update-repometadata`. The task can update one or multiple repositories at the
+same time. Furthermore, it can work on different branches, both existing and
 new ones. To get a list of available options and additional help, run
 
 ```bash
