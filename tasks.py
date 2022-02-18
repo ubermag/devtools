@@ -115,6 +115,8 @@ def update_repometadata(c,
             with _change_directory(f'../{REPODIR}/{repo}'):
                 cmd = '-B' if create_branch else ''
                 c.run(f'git checkout {cmd} {branch}')
+                if not create_branch:
+                    c.run('git pull')
 
             generate_files(
                 repository=repo,
