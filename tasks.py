@@ -129,7 +129,8 @@ def update_repometadata(c,
 
             shutil.rmtree(f'{repo}')
             with _change_directory(f'../{REPODIR}/{repo}'):
-                c.run('git add .')
+                for f in file:
+                    c.run(f'git add {os.path.relpath(f)}')
                 c.run(f'git commit -m "{commit_message}"')
                 if push:
                     push = f'-u origin {branch}' if branch is not None else ''
