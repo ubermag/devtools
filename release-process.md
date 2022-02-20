@@ -21,8 +21,8 @@ Order of release of Ubermag packages (internal dependencies):
 ## 2. Release on Github
 
 - Go to releases
-- `Draft a new release` -> `Choose a tag` (Select new version tag, **not the
-  latest tag**)
+- `Draft a new release` -> `Choose a tag` (Select new version tag, **not** the
+  *latest* tag)
 - [Release title can stay empty]
 - Publish release
 
@@ -30,7 +30,7 @@ Order of release of Ubermag packages (internal dependencies):
 
 - Wait for the bot to dectect the new release on PyPI (~some hours). A new PR in
   `conda-forge/<package>-feedstock` will be opened automatically.
-- The package version is updated automatically.
+- [The package version is updated automatically.]
 - Update the versions of dependencies manually.
 - Change any other metadata, e.g. code owners -> **add comment**
   `@conda-forge-admin please re-render`
