@@ -15,7 +15,7 @@ Order of release of Ubermag packages (internal dependencies):
 ## 1. PyPI
 
 - Increase version and dependency versions in `setup.cfg` and `pyproject.toml`
-  and commit changes.
+- commit changes.
 - Run `invoke release`.
 
 ## 2. Release on Github
