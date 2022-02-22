@@ -15,7 +15,7 @@ Order of release of Ubermag packages (internal dependencies):
 ## 1. PyPI
 
 - Increase version and dependency versions in `setup.cfg` and `pyproject.toml`
-- commit changes.
+- Commit changes
 - Run `invoke release`.
 
 ## 2. Release on Github
@@ -32,8 +32,9 @@ Order of release of Ubermag packages (internal dependencies):
   `conda-forge/<package>-feedstock` will be opened automatically.
 - [The package version is updated automatically.]
 - Update the versions of dependencies manually.
-- Change any other metadata, e.g. code owners -> **add comment**
-  `@conda-forge-admin please re-render`
+- Change any other metadata, e.g. code owners
+  - **add comment** `@conda-forge-admin please re-render`
+  - If the version did not change update the `build number`
 - After tests pass the PR can be merged. This releases the new version on
   conda-forge. After merging it takes a few hours until the package index for
   `conda-forge` is updated and the package can be installed via `conda`. The
