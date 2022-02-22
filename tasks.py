@@ -49,10 +49,10 @@ def clone_extras(c, protocol):
     _clone_repos(c, protocol, EXTRA_REPOS)
 
 
-@task
-def pull(c):
-    """Pull changes for all repositories."""
-    _execute_command(c, 'git pull')
+@task(help={'cmd': 'Command to be executed in all packages.'})
+def do_in_packages(c, cmd):
+    """Execute command in all code repositories."""
+    _execute_command(c, cmd)
 
 
 @task
@@ -152,6 +152,7 @@ def _clone_repos(c, protocol, repolist):
 
 def _execute_command(c, cmd):
     for repo in REPOLIST:
+        print('==>', repo)
         with _change_directory(f'{REPODIR}/{repo}'):
             c.run(cmd)
 
