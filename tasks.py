@@ -1,11 +1,9 @@
 """Tasks to set up ubermag for development."""
-import contextlib
 import os
 import shutil
 
-from colorama import init, Fore
+from colorama import Fore, init
 from invoke import task
-
 
 REPODIR = 'repos'
 
@@ -30,6 +28,7 @@ EXTRA_REPOS = [
     'workshop',
 ]
 
+# for coloured output in print
 init(autoreset=True)
 
 
@@ -47,6 +46,7 @@ def clone_extras(c, protocol):
     - help
     - mumax3c
     - ubermag.github.io (website repository)
+    - tutorials
     - workshop
     """
     _clone_repos(c, protocol, EXTRA_REPOS)
@@ -54,21 +54,31 @@ def clone_extras(c, protocol):
 
 @task(
     help={
-        'cmd': 'Command to be executed in all packages.',
+        'command': 'Command to be executed in all packages.',
         'repo': ('List of repos to execute command in. If not specified all '
                  'package repos are used by default.'),
         'include_extras': ('Include extra repositories (see clone-extras).'
                            ' This is has no effect if repos are given'
                            ' explicitely.')},
     iterable=['repo'])
-def per_repo(c, cmd, repo, include_extras=False):
-    """Execute command in all code repositories."""
+def per_repo(c, command, repo, include_extras=False):
+    """Execute command in multiple repositories.
+
+    The ``command`` will be executed in multiple repositories, by default in
+    all package repositories. To also include the extra repositories pass the
+    flag ``--include-extras``. Alternatively, a custom list of repositories can
+    be specified with ``--repo <REPO1> --repo <REPO2> ...``.
+
+    Example (pull changes in all package repos):
+
+    ``per-repo "git pull"``
+    """
     if repo == []:
         repo = REPOLIST + EXTRA_REPOS if include_extras else REPOLIST
     for r in repo:
         print(f'{Fore.BLUE}==> {r}')
         with c.cd(f'{REPODIR}/{r}'):
-            c.run(cmd)
+            c.run(command)
 
 
 @task
@@ -80,7 +90,7 @@ def install(c):
 
     WARNING: Installs into the current environment without any tests.
     """
-    _execute_command(c, 'pip install -e .[dev,test]')
+    per_repo(c, 'pip install -e .[dev,test]', REPOLIST)
 
 
 @task
@@ -93,7 +103,7 @@ def uninstall(c):
 @task
 def init_pre_commit(c):
     """Initialise pre-commit for all subpackages."""
-    _execute_command(c, 'pre-commit install')
+    per_repo(c, 'pre-commit install', REPOLIST)
 
 
 @task(
@@ -106,8 +116,7 @@ def init_pre_commit(c):
                           ' branches [git option -B is used].'),
         'commit_message': 'Optionally pass a custom commit message.',
         'push': 'Push changes; defaults to true.'},
-    iterable=['file', 'repo']
-)
+    iterable=['file', 'repo'])
 def update_repometadata(c,
                         repo,
                         file,
@@ -126,9 +135,9 @@ def update_repometadata(c,
     if len(repo) == 0:
         repo = REPOLIST
 
-    with _change_directory('repometadata'):
+    with c.cd('repometadata'):
         for repo in repo:
-            with _change_directory(f'../{REPODIR}/{repo}'):
+            with c.cd(f'../{REPODIR}/{repo}'):
                 cmd = '-B' if create_branch else ''
                 c.run(f'git checkout {cmd} {branch}')
                 if not create_branch:
@@ -144,7 +153,7 @@ def update_repometadata(c,
                             dirs_exist_ok=True)
 
             shutil.rmtree(f'{repo}')
-            with _change_directory(f'../{REPODIR}/{repo}'):
+            with c.cd(f'../{REPODIR}/{repo}'):
                 for f in file:
                     c.run(f'git add {os.path.relpath(f)}')
                 c.run(f'git commit -m "{commit_message}"')
@@ -161,23 +170,6 @@ def _clone_repos(c, protocol, repolist):
         base_url = 'https://github.com/ubermag/'
     else:
         raise ValueError(f'Unknown protocol {protocol}.')
-    with _change_directory(REPODIR):
+    with c.cd(REPODIR):
         for repo in repolist:
             c.run(f'git clone {base_url}{repo}.git')
-
-
-def _execute_command(c, cmd):
-    for repo in REPOLIST:
-        print('==>', repo)
-        with _change_directory(f'{REPODIR}/{repo}'):
-            c.run(cmd)
-
-
-@contextlib.contextmanager
-def _change_directory(path):
-    prev_path = os.getcwd()
-    os.chdir(path)
-    try:
-        yield
-    finally:
-        os.chdir(prev_path)
