@@ -110,11 +110,15 @@ Clones the following additional repositories:
 python -c "import ubermag; ubermag.test()"
 ```
 
-### Pull changes in all packages
+### Execute command in multiple repos (e.g. pull)
+
+Pull changes in all code repos:
 
 ```bash
-invoke pull
+invoke per-repo "git pull"
 ```
+
+See `invoke --help per-repo` for available options.
 
 ### [SKIP - Not yet fully set up] Set up pre-commit
 
