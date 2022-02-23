@@ -3,6 +3,7 @@ import contextlib
 import os
 import shutil
 
+from colorama import init, Fore
 from invoke import task
 
 
@@ -28,6 +29,8 @@ EXTRA_REPOS = [
     'ubermag.github.io',
     'workshop',
 ]
+
+init(autoreset=True)
 
 
 @task(help={'protocol': 'Protocol to use, either "ssh" or "https".'})
@@ -63,7 +66,7 @@ def per_repo(c, cmd, repo, include_extras=False):
     if repo == []:
         repo = REPOLIST + EXTRA_REPOS if include_extras else REPOLIST
     for r in repo:
-        print('==>', r)
+        print(f'{Fore.BLUE}==> {r}')
         with c.cd(f'{REPODIR}/{r}'):
             c.run(cmd)
 
