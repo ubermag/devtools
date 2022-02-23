@@ -49,10 +49,23 @@ def clone_extras(c, protocol):
     _clone_repos(c, protocol, EXTRA_REPOS)
 
 
-@task(help={'cmd': 'Command to be executed in all packages.'})
-def do_in_packages(c, cmd):
+@task(
+    help={
+        'cmd': 'Command to be executed in all packages.',
+        'repo': ('List of repos to execute command in. If not specified all '
+                 'package repos are used by default.'),
+        'include_extras': ('Include extra repositories (see clone-extras).'
+                           ' This is has no effect if repos are given'
+                           ' explicitely.')},
+    iterable=['repo'])
+def per_repo(c, cmd, repo, include_extras=False):
     """Execute command in all code repositories."""
-    _execute_command(c, cmd)
+    if repo == []:
+        repo = REPOLIST + EXTRA_REPOS if include_extras else REPOLIST
+    for r in repo:
+        print('==>', r)
+        with c.cd(f'{REPODIR}/{r}'):
+            c.run(cmd)
 
 
 @task
