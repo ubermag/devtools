@@ -90,7 +90,7 @@ def install(c):
 
     WARNING: Installs into the current environment without any tests.
     """
-    per_repo(c, 'pip install -e .[dev,test]', REPOLIST)
+    per_repo(c, 'pip install -e .[dev]', REPOLIST)
 
 
 @task
