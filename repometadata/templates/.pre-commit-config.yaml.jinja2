@@ -9,15 +9,15 @@ repos:
 #    args: [--markdown-linebreak-ext=md]
 #    exclude: '{{ package }}/tests/test_sample/.*'
 
-# - repo: https://github.com/pycqa/isort
-#   rev: 5.10.1
-#   hooks:
-#   - id: isort
+- repo: https://github.com/pycqa/isort
+  rev: 5.10.1
+  hooks:
+  - id: isort
 
-# - repo: https://github.com/nbQA-dev/nbQA
-#   rev: 1.2.3
-#   hooks:
-#     - id: nbqa-isort  # isort inside Jupyter notebooks
+- repo: https://github.com/nbQA-dev/nbQA
+  rev: 1.2.3
+  hooks:
+  - id: nbqa-isort  # isort inside Jupyter notebooks
 
 - repo: https://github.com/PyCQA/flake8
   rev: 4.0.1
