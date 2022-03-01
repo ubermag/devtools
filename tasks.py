@@ -135,31 +135,33 @@ def update_repometadata(c,
     if len(repo) == 0:
         repo = REPOLIST
 
-    with c.cd('repometadata'):
-        for repo in repo:
-            with c.cd(f'../{REPODIR}/{repo}'):
-                cmd = '-B' if create_branch else ''
-                c.run(f'git checkout {cmd} {branch}')
-                if not create_branch:
-                    c.run('git pull')
+    for repo in repo:
+        with c.cd(f'{REPODIR}/{repo}'):
+            cmd = '-B' if create_branch else ''
+            c.run(f'git checkout {cmd} {branch}')
+            if not create_branch:
+                c.run('git pull')
 
-            generate_files(
-                repository=repo,
-                files=file,
-                pyproject_path=f'../{REPODIR}/{repo}/pyproject.toml')
+        os.chdir('repometadata')
+        print(os.getcwd())
+        modified = generate_files(
+            repository=repo,
+            files=file,
+            pyproject_path=f'../{REPODIR}/{repo}/pyproject.toml')
+        os.chdir('..')
 
-            shutil.copytree(src=f'{repo}',
-                            dst=f'../{REPODIR}/{repo}',
-                            dirs_exist_ok=True)
+        shutil.copytree(src=f'repometadata/{repo}',
+                        dst=f'{REPODIR}/{repo}',
+                        dirs_exist_ok=True)
 
-            shutil.rmtree(f'{repo}')
-            with c.cd(f'../{REPODIR}/{repo}'):
-                for f in file:
-                    c.run(f'git add {os.path.relpath(f)}')
-                c.run(f'git commit -m "{commit_message}"')
-                if push:
-                    push = f'-u origin {branch}' if branch is not None else ''
-                    c.run(f'git push {push}')
+        shutil.rmtree(f'repometadata/{repo}')
+        with c.cd(f'{REPODIR}/{repo}'):
+            for f in modified:
+                c.run(f'git add {os.path.relpath(f)}')
+            c.run(f'git commit -m "{commit_message}"')
+            if push:
+                push = f'-u origin {branch}' if branch is not None else ''
+                c.run(f'git push {push}')
 
 
 def _clone_repos(c, protocol, repolist):

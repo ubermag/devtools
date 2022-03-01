@@ -67,6 +67,12 @@ def generate_files(*, repository, files=None, pyproject_path=''):
 
         Local path to the repository. Output will be written to the local
         repository. If not specified download pyproject.toml from GitHub.
+
+    Returns
+    -------
+    List[str]
+
+        List of files that have been modified.
     """
     if 'all' in files:
         files = [
@@ -128,6 +134,7 @@ def generate_files(*, repository, files=None, pyproject_path=''):
         if name in files:
             template = env.get_template(name=t_name)
             template.stream(**data).dump(f'{repository}/{name}')
+    return files
 
 
 if __name__ == '__main__':
