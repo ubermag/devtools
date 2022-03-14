@@ -69,9 +69,16 @@ def per_repo(c, command, repo, include_extras=False):
     flag ``--include-extras``. Alternatively, a custom list of repositories can
     be specified with ``--repo <REPO1> --repo <REPO2> ...``.
 
-    Example (pull changes in all package repos):
+    Examples
+    --------
+
+    1. Pull changes in all package repos
 
     ``per-repo "git pull"``
+
+    2. Initialise pre-commit in all repos
+
+    ``per-repo "pre-commit install"``
     """
     if repo == []:
         repo = REPOLIST + EXTRA_REPOS if include_extras else REPOLIST
@@ -98,12 +105,6 @@ def uninstall(c):
     """Uninstall all ubermag subpackages."""
     for pkg in reversed(REPOLIST):
         c.run(f'pip uninstall {pkg} -y')
-
-
-@task
-def init_pre_commit(c):
-    """Initialise pre-commit for all subpackages."""
-    per_repo(c, 'pre-commit install', REPOLIST)
 
 
 @task(

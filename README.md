@@ -120,10 +120,10 @@ invoke per-repo "git pull"
 
 See `invoke --help per-repo` for available options.
 
-### [SKIP - Not yet fully set up] Set up pre-commit
+### Set up pre-commit
 
 ```bash
-invoke init-pre-commit
+invoke per-repo "pre-commit install"
 ```
 
 ### Uninstalling packages
