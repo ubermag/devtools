@@ -136,8 +136,9 @@ def update_repometadata(c,
     if len(repo) == 0:
         repo = REPOLIST
 
-    for repo in repo:
-        with c.cd(f'{REPODIR}/{repo}'):
+    for r in repo:
+        print(f'{Fore.BLUE}==> {r}')
+        with c.cd(f'{REPODIR}/{r}'):
             cmd = '-B' if create_branch else ''
             c.run(f'git checkout {cmd} {branch}')
             if not create_branch:
@@ -146,17 +147,17 @@ def update_repometadata(c,
         os.chdir('repometadata')
         print(os.getcwd())
         modified = generate_files(
-            repository=repo,
+            repository=r,
             files=file,
-            pyproject_path=f'../{REPODIR}/{repo}/pyproject.toml')
+            pyproject_path=f'../{REPODIR}/{r}/pyproject.toml')
         os.chdir('..')
 
-        shutil.copytree(src=f'repometadata/{repo}',
-                        dst=f'{REPODIR}/{repo}',
+        shutil.copytree(src=f'repometadata/{r}',
+                        dst=f'{REPODIR}/{r}',
                         dirs_exist_ok=True)
 
-        shutil.rmtree(f'repometadata/{repo}')
-        with c.cd(f'{REPODIR}/{repo}'):
+        shutil.rmtree(f'repometadata/{r}')
+        with c.cd(f'{REPODIR}/{r}'):
             for f in modified:
                 c.run(f'git add {os.path.relpath(f)}')
             c.run(f'git commit -m "{commit_message}"')
