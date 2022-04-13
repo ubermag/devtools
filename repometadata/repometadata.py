@@ -82,7 +82,6 @@ def generate_files(*, repository, files=None, pyproject_path=''):
             '.pre-commit-config.yaml',
             'binder/environment.yml',
             'LICENSE',
-            'Makefile',
             'README.md',
             'nbval.cfg',
             'pyproject.toml',
