@@ -1,5 +1,6 @@
 [authors]
 "David Cortés Ortuño" = {github = "@davidcortesortuno", affiliations = ["utrecht"]}
+"Gary Downing" = {github = "@", affiliations = ["southampton"]}
 "Hans Fangohr" = {github = "@fangohr", affiliations = ["southampton", "max-planck", "cfel"]}
 "James Loudon" = {github = "@", affiliations = ["cambridge"]}
 "Jeroen Mulkers" = {github = "@JeroenMulkers", affiliations = ["ghent"]}
@@ -18,7 +19,7 @@
 "Thomas Hicken" = {github = "@", affiliations = ["durham"]}
 "Thomas Kluyver" = {github = "@takluyver", affiliations = ["xfel"]}
 "Vanessa Nehruji" = {github = "@vanessanehruji", affiliations = ["southampton"]}
-"Swapneel Amit Pathak" = {github ="@swapneelap", affiliations = ["max-planck"]}
+"Swapneel Amit Pathak" = {github ="@swapneelap", affiliations = ["southampton", "max-planck"]}
 
 [affiliations]
 birmingham = "Research Software Group, University of Birmingham, Birmingham B15 2TT, UK"
