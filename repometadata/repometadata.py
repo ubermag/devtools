@@ -2,6 +2,7 @@
 import argparse
 import datetime
 import os
+
 import jinja2
 import requests
 import tomli
@@ -78,6 +79,7 @@ def generate_files(*, repository, files=None, pyproject_path=''):
         files = [
             '.github/workflows/conda.yml',
             '.github/workflows/workflow.yml',
+            '.github/environment.yml',
             '.gitignore',
             '.pre-commit-config.yaml',
             'binder/environment.yml',
