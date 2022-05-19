@@ -3,7 +3,7 @@ import os
 import shutil
 
 from colorama import Fore, init
-from invoke import task
+from invoke import Exit, task
 
 REPODIR = 'repos'
 
@@ -110,7 +110,7 @@ def uninstall(c):
 @task(
     help={
         'repo': 'List of repos to update; all are updated if not specified',
-        'file': 'List of files to update; all are updated if not specified',
+        'file': 'List of files to update; "all" updates all files',
         'branch': ('Name of the branch to work on. If the branch does not'
                    ' exist --create-branch must be passed.'),
         'create-branch': ('Create the specified branch. Overwrites existing'
@@ -132,7 +132,7 @@ def update_repometadata(c,
     """
     from repometadata.repometadata import generate_files
     if len(file) == 0:
-        file = ['all']
+        raise Exit('No file specified; use "all" to update all files')
     if len(repo) == 0:
         repo = REPOLIST
 
