@@ -1,6 +1,5 @@
 [build-system]
-# 40.8.0 is the first version compatible with PEP 517
-requires = ["setuptools>=40.8.0", "wheel"]
+requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -61,8 +60,17 @@ repository = "https://github.com/ubermag/{{ package }}"
 {%- endfor %}
 {%- endif %}
 
+[tool.black]
+experimental-string-processing = true
+
+[tool.coverage.run]
+omit = {{ omit|replace("'", '"') }}
+
+[tool.isort]
+profile = "black"
+skip_gitignore = true  # ignores files listed in .gitignore
+
 # to define additional information we use a custom table
-# we need to own the entry for tool.NAME on PyPI
 # see: https://www.python.org/dev/peps/pep-0518/#tool-table
 [tool.ubermag]
 doi = "{{ doi }}"
@@ -74,13 +82,3 @@ contributors = [
 ]
 about = """
 {{ about }}"""
-
-[tool.coverage.run]
-omit = {{ omit|replace("'", '"') }}
-
-[tool.isort]
-profile = "black"
-skip_gitignore = true  # ignores files listed in .gitignore
-
-[tool.black]
-experimental-string-processing = true
