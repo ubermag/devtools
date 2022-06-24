@@ -15,6 +15,7 @@ REPOLIST = [
     'micromagneticmodel',
     'micromagneticdata',
     'micromagnetictests',
+    'mumax3c',
     'oommfc',
     'mag2exp',
     'ubermag',
@@ -22,7 +23,6 @@ REPOLIST = [
 
 EXTRA_REPOS = [
     'help',
-    'mumax3c',
     'tutorials',
     'ubermag.github.io',
     'workshop',
