@@ -9,9 +9,9 @@ Order of release of Ubermag packages (internal dependencies):
 5. micromagneticdata (disretisedfield, ubermagtable)
 6. miromagetictests (micromagneticmodel)
 7. oommfc (ubermagtable, micromagnetictests, micromagneticdata)
-8. mag2exp (oommfc)
-9. ubermag (mag2exp, micromagneticdata) [all package versions are specified
-   explicitely]
+8. mumax3c (ubermagtable, micromagnetictests, micromagneticmodel)
+9. mag2exp (oommfc)
+10. ubermag (mag2exp, micromagneticdata) [all package versions are specified explicitely]
 
 ## 1. PyPI
 
