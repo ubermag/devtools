@@ -52,4 +52,4 @@ Order of release of Ubermag packages (internal dependencies):
 - Update the ubermag version in `ubermag.github.io/environment.yml`.
 - Update the changelog (`source/changelog.rst` in the `ubermag.github.io`
   repository) and add the release date (of the `ubermag` conda package).
-- Merge the PR for the changelog updates.
+- Merge the PR for the changelog updates (this automatically triggers a re-build of the website).
