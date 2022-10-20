@@ -5,7 +5,7 @@ Order of release of Ubermag packages (internal dependencies):
 1. ubermagutil
 2. disretisedfield (ubermagutil)
 3. ubermagtable (ubermagutil)
-4. micromagneticmodel (disretisedfield)
+4. micromagneticmodel (discretisedfield)
 5. micromagneticdata (disretisedfield, ubermagtable)
 6. miromagetictests (micromagneticmodel)
 7. oommfc (ubermagtable, micromagnetictests, micromagneticdata)
@@ -53,4 +53,3 @@ Order of release of Ubermag packages (internal dependencies):
 - Update the changelog (`source/changelog.rst` in the `ubermag.github.io`
   repository) and add the release date (of the `ubermag` conda package).
 - Merge the PR for the changelog updates.
-- Manually trigger the action `publish website`.
