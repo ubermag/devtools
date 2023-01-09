@@ -72,6 +72,7 @@ def build_dists(c):
     if os.path.exists("dist"):
         shutil.rmtree("dist")
     c.run(f"{PYTHON} -m build")
+    c.run("twine check dist/*")
 
 
 @task(build_dists)
