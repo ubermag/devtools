@@ -135,28 +135,10 @@ invoke uninstall
 ## Update common metadata
 
 `repometadata` contains templates and additional helper scripts to update
-metadata common to all repositories. The metadata can be updated:
-- on GitHub using the action in the `devtools` repository
-- locally using the `invoke` task `update-repometadata`
+metadata common to all repositories. The metadata can be updated using the
+`invoke` task `update-repometadata`
 
-The local update provides more functionallity.
-
-### On GitHub
-
-The action needs:
-- the name of the repository
-- [optionally] the name of the files to update; if no files are specified all
-  files are updated
-
-The action can only update one repository at a time. Therefore, it is necessary
-to run the action for all repositories individually.
-
-**Note** The action creates a new branch `metadata-update` and opens a PR. It
-will fail if the branch already exists. PRs are opened using the `ubermagbot` account.
-
-### Locally
-
-**The local update will only work for the directory structure explained
+**The update will only work for the directory structure explained
 above. Follow the instructions in the first section of this README.**
 
 The repometadata can locally be updated using the `invoke` task
@@ -198,7 +180,7 @@ Examples:
    ```bash
    $ invoke update-repometadata -r ubermagutil -r discretisedfield -b master --no-push
    ```
-   
+
 3. Update `README.md` in all repositories using a new (`-c`) branch
    `repo-metadata` with a special commit message and push the changes:
 
