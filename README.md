@@ -68,7 +68,7 @@ basic packages (`python`, `pip`, `oommf`, and `invoke`) from `conda-forge` chann
 `conda` (everything else will be installed via `pip`).
 
 ```bash
-conda create -n ubermagdev -c conda-forge -y python=3.8 pip oommf invoke colorama
+conda env create -f environment.yaml
 conda activate ubermagdev
 ```
 
