@@ -30,7 +30,7 @@ jobs:
     - name: Set up conda
       uses: conda-incubator/setup-miniconda@v4
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: ${{ '{{' }} matrix.python-version {{ '}}' }}
         auto-update-conda: true
         activate-environment: conda-environment
         environment-file: .github/environment.yml
