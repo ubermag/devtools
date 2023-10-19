@@ -25,7 +25,7 @@ Order of release of Ubermag packages (internal dependencies):
 - Go to releases
 - `Draft a new release` -> `Choose a tag` (Select new version tag, **not** the
   *latest* tag)
-- [Release title can stay empty]
+- Put release version as title
 - Publish release
 
 ## 3. Conda-forge
