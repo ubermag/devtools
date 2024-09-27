@@ -26,6 +26,7 @@ EXTRA_REPOS = [
     'tutorials',
     'ubermag.github.io',
     'workshop',
+    'clustering_vector_fields',
 ]
 
 # for coloured output in print

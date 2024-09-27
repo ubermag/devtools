@@ -20,6 +20,7 @@
 "Thomas Kluyver" = {github = "@takluyver", affiliations = ["xfel"]}
 "Vanessa Nehruji" = {github = "@vanessanehruji", affiliations = ["southampton"]}
 "Swapneel Amit Pathak" = {github ="@swapneelap", affiliations = ["southampton", "max-planck"]}
+"Kurt Rahir" = {github = "@kurtrahir", affiliations = ["southampton", "max-planck"]}
 
 [affiliations]
 birmingham = "Research Software Group, University of Birmingham, Birmingham B15 2TT, UK"
