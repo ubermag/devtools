@@ -63,19 +63,21 @@ here):
 
 #### 1. Create and activate `conda` environment
 
-Create a new `conda` environment, here called `ubermagdev`, and install the most
+If required install `conda`. Suggestion: use [miniforge](https://github.com/conda-forge/miniforge).
+
+Create a new `conda` environment, here called `ubermagdev-312`, and install the most
 basic packages (`python`, `pip`, `oommf`, and `invoke`) from `conda-forge` channel using
-`conda` (everything else will be installed via `pip`).
+`conda` (everything else later on will be installed via `pip`).
+We use `conda` for this step because it simplifies the installation of `OOMMF`.
 
 ```bash
 conda env create -f environment.yaml
-conda activate ubermagdev
+conda activate ubermagdev-312
 ```
 
-We use `conda` for this step because it simplifies the installation of `OOMMF`.
-(If you don't have `conda` we suggest you install
-[`miniconda3`](https://docs.conda.io/en/latest/miniconda.html).) We use Python
-version 3.8 as this is the oldest version `ubermag` currently supports.
+We use Python version 3.12 to benefit from the performance improvements in
+recent Python versions. Note, that Python 3.8 is the oldest version currently
+supported by `ubermag` so no features of newer Python versions can be used.
 
 #### 2. Clone and install all packages in development mode
 
