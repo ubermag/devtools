@@ -72,7 +72,7 @@ We use `conda` for this step because it simplifies the installation of `OOMMF`.
 
 ```bash
 conda env create -f environment.yaml
-conda activate ubermagdev-312
+conda activate ubermagdev312
 ```
 
 We use Python version 3.12 to benefit from the performance improvements in
