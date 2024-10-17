@@ -116,7 +116,8 @@ def uninstall(c):
         'create-branch': ('Create the specified branch. Overwrites existing'
                           ' branches [git option -B is used].'),
         'commit_message': 'Optionally pass a custom commit message.',
-        'push': 'Push changes; defaults to true.'},
+        'commit': 'Commit changes; defaults to true',
+        'push': 'Push changes (requires creating a commit); defaults to true.'},
     iterable=['file', 'repo'])
 def update_repometadata(c,
                         repo,
@@ -124,6 +125,7 @@ def update_repometadata(c,
                         branch,
                         create_branch=False,
                         commit_message='Update repository metadata',
+                        commit=True,
                         push=True):
     """Update repo-metadata locally.
 
@@ -157,13 +159,14 @@ def update_repometadata(c,
                         dirs_exist_ok=True)
 
         shutil.rmtree(f'repometadata/{r}')
-        with c.cd(f'{REPODIR}/{r}'):
-            for f in modified:
-                c.run(f'git add {os.path.relpath(f)}')
-            c.run(f'git commit -m "{commit_message}"')
-            if push:
-                push = f'-u origin {branch}' if branch is not None else ''
-                c.run(f'git push {push}')
+        if commit:
+            with c.cd(f'{REPODIR}/{r}'):
+                for f in modified:
+                    c.run(f'git add {os.path.relpath(f)}')
+                c.run(f'git commit -m "{commit_message}"')
+                if push:
+                    push = f'-u origin {branch}' if branch is not None else ''
+                    c.run(f'git push {push}')
 
 
 def _clone_repos(c, protocol, repolist):
