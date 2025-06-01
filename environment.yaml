@@ -1,9 +1,9 @@
-name: ubermagdev312
+name: ubermagdev313
 channels:
   - conda-forge
   - nodefaults
 dependencies:
-  - python=3.12
+  - python=3.13
   - pip
   - oommf
   - invoke
