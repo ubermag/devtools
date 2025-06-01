@@ -13,22 +13,14 @@ Order of release of Ubermag packages (internal dependencies):
 9. mag2exp (oommfc)
 10. ubermag (mag2exp, micromagneticdata) [all package versions are specified explicitely]
 
-## 1. PyPI
+## 1. PyPI and GitHub release
 
+Automated via CI:
 - Increase version and dependency versions in `pyproject.toml`
-- Commit changes
-- Run `invoke release`. (This task will run the unittests and doctests before
-  releasing the package).
+- Commit changes and push
+- Tag commit and push tag
 
-## 2. Release on Github
-
-- Go to releases
-- `Draft a new release` -> `Choose a tag` (Select new version tag, **not** the
-  *latest* tag)
-- Put release version as title
-- Publish release
-
-## 3. Conda-forge
+## 2. Conda-forge
 
 - Wait for the bot to dectect the new release on PyPI (~some hours). A new PR in
   `conda-forge/<package>-feedstock` will be opened automatically.
@@ -46,7 +38,7 @@ Order of release of Ubermag packages (internal dependencies):
 - Again, after merging it takes a few hours until the package index
   for `conda-forge` is updated and the package can be installed via `conda`.
 
-## 4. Website
+## 3. Website
 
 - Wait until all packages can be installed via `conda`.
 - Update the ubermag version in `ubermag.github.io/environment.yml`.
@@ -54,6 +46,6 @@ Order of release of Ubermag packages (internal dependencies):
   repository) and add the release date (of the `ubermag` conda package).
 - Merge the PR for the changelog updates (this automatically triggers a re-build of the website).
 
-## 5. Mailing list
+## 4. Mailing list
 
 Announce the new version on the mailing list (ubermag-users@lists.mpg.de).
